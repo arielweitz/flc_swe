@@ -12,7 +12,17 @@ class Style {
     fontFamily: 'Gotham Screen Smart',
     textTheme: TextTheme(
       headline1: TextStyle(
-          fontSize: 50.50, fontWeight: FontWeight.w300, color: Colors.black),
+        fontSize: 50.50,
+        fontWeight: FontWeight.w300,
+        color: Colors.black,
+        shadows: <Shadow>[
+          Shadow(
+            offset: Offset(2.0, 2.0),
+            blurRadius: 3.0,
+            color: Color.fromARGB(255, 255, 255, 255),
+          ),
+        ],
+      ),
       headline2: TextStyle(
           fontSize: 37.89, fontWeight: FontWeight.w500, color: Colors.black),
       headline3: TextStyle(

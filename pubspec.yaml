@@ -24,6 +24,7 @@ dependencies:
   dartz: ^0.9.2
   http: ^0.12.2
   fluro: ^1.7.6
+  url_strategy: ^0.1.1
   responsive_builder: ^0.2.0+2
   flutter:
     sdk: flutter
@@ -54,7 +55,8 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/homeImage.png
+    - assets/images/hp1.jpg
+    - assets/images/hp2.jpg
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

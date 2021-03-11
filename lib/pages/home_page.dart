@@ -1,5 +1,6 @@
 import 'package:flc_swe/components/general/bounding_box.dart';
 import 'package:flc_swe/components/navbar/navbar.dart';
+import 'package:flc_swe/theme/style.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -20,36 +21,56 @@ class HomePage extends StatelessWidget {
             preferredSize: Size.fromHeight(double.maxFinite),
             child: NavigationBar(scaffoldkey: _scaffoldKey)),
         body: BoundingBox(
-          child: NotificationListener<OverscrollIndicatorNotification>(
-            onNotification: (OverscrollIndicatorNotification overscroll) {
-              overscroll.disallowGlow();
-              return;
-            },
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Stack(children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: MediaQuery.of(context).size.height - 120,
+                        width: MediaQuery.of(context).size.width / 2,
+                        decoration: new BoxDecoration(
+                            image: new DecorationImage(
+                          fit: BoxFit.cover,
+                          alignment: FractionalOffset.topCenter,
+                          image: AssetImage('assets/images/hp1.jpg'),
+                        )),
+                      ),
+                      Container(
+                        height: MediaQuery.of(context).size.height - 120,
+                        width: MediaQuery.of(context).size.width / 2,
+                        decoration: new BoxDecoration(
+                            image: new DecorationImage(
+                          fit: BoxFit.cover,
+                          alignment: FractionalOffset.topCenter,
+                          image: AssetImage('assets/images/hp2.jpg'),
+                        )),
+                      )
+                    ],
+                  ),
+                  Container(
                     height: MediaQuery.of(context).size.height - 120,
-                    child: Image.asset('assets/images/homeImage.png',
-                        color: Color.fromRGBO(255, 255, 255, 0.5),
-                        colorBlendMode: BlendMode.modulate),
+                    width: MediaQuery.of(context).size.width,
+                    color: Color.fromRGBO(255, 255, 255, 0.19),
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height - 120,
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("FLC", style: Style.theme.textTheme.headline1),
+                          Text("PROFILES",
+                              style: Style.theme.textTheme.headline1),
+                        ],
+                      ),
+                    ),
                   )
-                  // Stack(
-                  //   children: [
-                  //     Row(
-                  //       children: [
-                  //         SizedBox(
-                  //             height: MediaQuery.of(context).size.height - 80,
-                  //             child: Image.asset('assets/images/hp1.jpg')),
-                  //         SizedBox(
-                  //             height: MediaQuery.of(context).size.height - 80,
-                  //             child: Image.asset('assets/images/hp2.jpg')),
-                  //       ],
-                  //     )
-                  //   ],
-                  // )
-                ],
-              ),
+                ])
+              ],
             ),
           ),
         ),

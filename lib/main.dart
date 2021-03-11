@@ -1,8 +1,10 @@
 import 'package:flc_swe/pages/home_page.dart';
 import 'package:flc_swe/theme/style.dart';
 import 'package:flutter/material.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 void main() {
+  setPathUrlStrategy();
   runApp(FLC());
 }
 
