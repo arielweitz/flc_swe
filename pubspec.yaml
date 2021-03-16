@@ -57,6 +57,19 @@ flutter:
   assets:
     - assets/images/hp1.jpg
     - assets/images/hp2.jpg
+
+  fonts:
+    - family: Roboto Condensed
+      fonts:
+        - asset: assets/fonts/RobotoCondensed/RobotoCondensed-Regular.ttf
+          weight: 500
+        - asset: assets/fonts/RobotoCondensed/RobotoCondensed-Italic.ttf
+          style: italic
+        - asset: assets/fonts/RobotoCondensed/RobotoCondensed-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/RobotoCondensed/RobotoCondensed-Light.ttf
+          weight: 300
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

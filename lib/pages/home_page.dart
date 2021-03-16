@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
                   Container(
                     height: MediaQuery.of(context).size.height - 120,
                     width: MediaQuery.of(context).size.width,
-                    color: Color.fromRGBO(255, 255, 255, 0.19),
+                    color: Color.fromRGBO(255, 255, 255, 0.50),
                   ),
                   Container(
                     height: MediaQuery.of(context).size.height - 120,
@@ -64,7 +64,7 @@ class HomePage extends StatelessWidget {
                         children: [
                           Text("FLC", style: Style.theme.textTheme.headline1),
                           Text("PROFILES",
-                              style: Style.theme.textTheme.headline1),
+                              style: Style.theme.textTheme.headline2),
                         ],
                       ),
                     ),
