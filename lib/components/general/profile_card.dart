@@ -8,18 +8,34 @@ class ProfileCard extends StatelessWidget {
   final double height;
   final double width;
 
-  const ProfileCard({this.profile, this.color, this.height, this.width});
+  const ProfileCard(
+      {this.profile, @required this.color, this.height, this.width});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        height: 320,
-        width: 260,
-        color: Colors.orange,
-        child: Align(
-          alignment: Alignment.bottomCenter,
-          child: Padding(
+    return Container(
+      height: 340,
+      width: 260,
+      color: color,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: Column(
+              children: [
+                Text(
+                  "BOB ROSS",
+                  style: Style.theme.textTheme.headline5,
+                ),
+                Text(
+                  "SENIOR",
+                  style: Style.theme.textTheme.headline5.copyWith(fontSize: 16),
+                ),
+              ],
+            ),
+          ),
+          Padding(
             padding: const EdgeInsets.only(bottom: 20.0),
             child: Container(
               height: 220,
@@ -30,7 +46,7 @@ class ProfileCard extends StatelessWidget {
                       height: 200, width: 200)),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

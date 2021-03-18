@@ -1,3 +1,4 @@
+import 'package:flc_swe/pages/class_page.dart';
 import 'package:flc_swe/pages/home_page.dart';
 import 'package:flc_swe/pages/profile_page.dart';
 import 'package:fluro/fluro.dart' as fluro;
@@ -13,7 +14,7 @@ class FluroRouter {
   static fluro.Handler _profilesHandler = fluro.Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) {
     if (params['uid'][0] == '') {
-      // return ClassPage();
+      return ClassPage(year: params['years'][0]);
     } else {
       // return ProfilePage();
     }
