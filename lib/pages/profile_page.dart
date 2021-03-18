@@ -23,36 +23,10 @@ class ProfilePage extends StatelessWidget {
             child: NavigationBar(scaffoldkey: _scaffoldKey)),
         body: BoundingBox(
           width: sizingInformation.screenSize.width,
-          child: Column(
-            children: [
-              Text(
-                "Profiles",
-                style: Style.theme.textTheme.headline1,
-              ),
-              Flexible(
-                child: GridView.extent(
-                  shrinkWrap: true,
-                  primary: false,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  maxCrossAxisExtent: 500,
-                  children: <Widget>[
-                    ProfileCard(),
-                    ProfileCard(),
-                    ProfileCard(),
-                    ProfileCard(),
-                    ProfileCard(),
-                    ProfileCard(),
-                    ProfileCard(),
-                    ProfileCard(),
-                    ProfileCard(),
-                    ProfileCard(),
-                    ProfileCard(),
-                    ProfileCard(),
-                  ],
-                ),
-              )
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [],
+            ),
           ),
         ),
       ),
