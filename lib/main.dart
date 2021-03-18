@@ -1,10 +1,13 @@
 import 'package:flc_swe/pages/home_page.dart';
+import 'package:flc_swe/routing/route_names.dart';
+import 'package:flc_swe/routing/router.dart';
 import 'package:flc_swe/theme/style.dart';
 import 'package:flutter/material.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 void main() {
   setPathUrlStrategy();
+  FluroRouter.setupRouter();
   runApp(FLC());
 }
 
@@ -16,9 +19,8 @@ class FLC extends StatelessWidget {
       title: 'FLC',
       debugShowCheckedModeBanner: false,
       theme: Style.theme,
-      // initialRoute: HomeRoute,
-      // onGenerateRoute: FluroRouter.router.generator,
-      home: HomePage(),
+      initialRoute: HomeRoute,
+      onGenerateRoute: FluroRouter.router.generator,
     );
   }
 }
