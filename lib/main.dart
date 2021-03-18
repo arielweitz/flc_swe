@@ -19,7 +19,8 @@ class FLC extends StatelessWidget {
       title: 'FLC',
       debugShowCheckedModeBanner: false,
       theme: Style.theme,
-      initialRoute: HomeRoute,
+      //initialRoute: HomeRoute,
+      home: HomePage(),
       onGenerateRoute: FluroRouter.router.generator,
     );
   }
