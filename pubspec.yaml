@@ -25,6 +25,9 @@ dependencies:
   http: ^0.12.2
   fluro: ^1.7.6
   url_strategy: ^0.1.1
+  provider: ^4.3.2+1
+  firebase_auth: ^0.18.0+1
+  google_sign_in: ^4.5.1
   responsive_builder: ^0.2.0+2
   flutter:
     sdk: flutter
@@ -60,6 +63,7 @@ flutter:
   assets:
     - assets/images/hp1.jpg
     - assets/images/hp2.jpg
+    - assets/images/FLC_logo.png
 
   fonts:
     - family: Roboto Condensed

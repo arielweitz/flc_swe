@@ -42,7 +42,9 @@ class Style {
       headline5: TextStyle(
           fontSize: 28.00, fontWeight: FontWeight.w300, color: Colors.white),
       headline6: TextStyle(
-          fontSize: 12.00, fontWeight: FontWeight.w700, color: Colors.black),
+          fontSize: 32.00,
+          fontWeight: FontWeight.w700,
+          color: Color(0xff6096BA)),
       subtitle1: TextStyle(
           fontSize: 12.00, fontWeight: FontWeight.w500, color: Colors.black),
       subtitle2: TextStyle(

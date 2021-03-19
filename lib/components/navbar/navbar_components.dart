@@ -1,3 +1,4 @@
+import 'package:flc_swe/routing/router.dart';
 import 'package:flc_swe/theme/style.dart';
 import 'package:fluro/fluro.dart' as fluro;
 import 'package:flutter/material.dart';
@@ -8,39 +9,37 @@ class NavBarLogo extends StatelessWidget {
     return SizedBox(
       height: 80,
       width: 150,
-      child: Image.asset('assets/images/logo.png'),
+      child: Image.asset('assets/images/FLC_logo.png'),
     );
   }
 }
 
-// class ClickableNavBarItem extends StatelessWidget {
-//   final Widget child;
-//   final String route;
-//   final bool logOut;
+class ClickableNavBarItem extends StatelessWidget {
+  final Widget child;
+  final String route;
+  final bool logOut;
 
-//   const ClickableNavBarItem({@required this.child, @required this.route, this.logOut = false});
+  const ClickableNavBarItem(
+      {@required this.child, @required this.route, this.logOut = false});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return InkWell(
-//         splashColor: Colors.transparent,
-//         hoverColor: Colors.transparent,
-//         highlightColor: Colors.transparent,
-//         focusColor: Colors.transparent,
-//         onTap: () {
-//           if (this.logOut) {
-//             context.read<FirebaseAuthService>().signOut();
-//           }
-//           FluroRouter.router.navigateTo(
-//               context,
-//               route,
-//               transition: fluro.TransitionType.fadeIn,
-//               transitionDuration: Duration(milliseconds: 150));
-//         },
-//         child: child
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+        splashColor: Colors.transparent,
+        hoverColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        focusColor: Colors.transparent,
+        onTap: () {
+          // if (this.logOut) {
+          //   context.read<FirebaseAuthService>().signOut();
+          // }
+          FluroRouter.router.navigateTo(context, route,
+              transition: fluro.TransitionType.fadeIn,
+              transitionDuration: Duration(milliseconds: 150));
+        },
+        child: child);
+  }
+}
 
 class NavBarItem extends StatelessWidget {
   final String title;

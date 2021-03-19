@@ -20,7 +20,6 @@ class ClassPage extends StatelessWidget {
   ClassPage({Key key, @required this.year}) : super(key: key);
 
   Widget build(BuildContext context) {
-    print((1000 / 260));
     return ResponsiveBuilder(
       builder: (context, sizingInformation) => Scaffold(
         resizeToAvoidBottomInset: false,
