@@ -1,3 +1,4 @@
+import 'package:flc_swe/routing/route_names.dart';
 import 'package:flutter/material.dart';
 
 import 'navbar_components.dart';
@@ -11,34 +12,34 @@ class NavigationBarTablet extends StatelessWidget {
     return Container(
       height: 80,
       child: Row(
-          // mainAxisSize: MainAxisSize.max,
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          // children: <Widget>[
-          //   Row(
-          //     children: [
-          //       IconButton(
-          //         splashColor: Colors.transparent,
-          //         hoverColor: Colors.transparent,
-          //         icon: Icon(Icons.menu, color: Colors.black, size: 32.0),
-          //         onPressed: () {
-          //           scaffoldkey.currentState.openDrawer();
-          //         },
-          //       ),
-          //       SizedBox(
-          //         width: 30.0,
-          //       ),
-          //       ClickableNavBarItem(
-          //         child: NavBarLogo(),
-          //         route: HomeRoute,
-          //       )
-          //     ],
-          //   ),
-          //   ClickableNavBarItem(
-          //     child: Icon(Icons.search, color: Colors.black, size: 32.0),
-          //     route: HomeRoute,
-          //   )
-          // ],
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Row(
+            children: [
+              IconButton(
+                splashColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                icon: Icon(Icons.menu, color: Colors.white, size: 32.0),
+                onPressed: () {
+                  scaffoldkey.currentState.openDrawer();
+                },
+              ),
+              SizedBox(
+                width: 30.0,
+              ),
+              ClickableNavBarItem(
+                child: NavBarLogo(),
+                route: HomeRoute,
+              )
+            ],
           ),
+          ClickableNavBarItem(
+            child: Icon(Icons.people, color: Colors.white, size: 32.0),
+            route: ClassesRoute,
+          )
+        ],
+      ),
     );
   }
 }

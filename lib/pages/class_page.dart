@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flc_swe/components/general/bounding_box.dart';
 import 'package:flc_swe/components/general/profile_card.dart';
 import 'package:flc_swe/components/navbar/navbar.dart';
+import 'package:flc_swe/components/navbar/navbar_components.dart';
 import 'package:flc_swe/theme/style.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -23,9 +24,10 @@ class ClassPage extends StatelessWidget {
     return ResponsiveBuilder(
       builder: (context, sizingInformation) => Scaffold(
         resizeToAvoidBottomInset: false,
-        // drawer:
-        // sizingInformation.deviceScreenType == DeviceScreenType.mobile ||
-        //     sizingInformation.deviceScreenType == DeviceScreenType.tablet ? NavigationDrawer() : null,
+        drawer: sizingInformation.deviceScreenType == DeviceScreenType.mobile ||
+                sizingInformation.deviceScreenType == DeviceScreenType.tablet
+            ? NavigationDrawer()
+            : null,
         backgroundColor: Colors.white,
         key: _scaffoldKey,
         appBar: PreferredSize(
@@ -35,11 +37,14 @@ class ClassPage extends StatelessWidget {
           width: sizingInformation.screenSize.width,
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 40.0),
-                child: Text(
-                  year + " PROFILES",
-                  style: Style.theme.textTheme.headline3,
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 40.0),
+                  child: Text(
+                    year + " PROFILES",
+                    style: Style.theme.textTheme.headline3,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
               Expanded(
@@ -57,8 +62,8 @@ class ClassPage extends StatelessWidget {
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 20.0),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 20.0, horizontal: 10),
                                 child: Text(
                                   "BOARDMEMBERS",
                                   style: Style.theme.textTheme.headline4,
@@ -96,8 +101,8 @@ class ClassPage extends StatelessWidget {
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 20.0),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 20.0, horizontal: 10),
                                 child: Text(
                                   "COUNCILMEMBERS",
                                   style: Style.theme.textTheme.headline4,
