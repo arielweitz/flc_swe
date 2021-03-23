@@ -1,5 +1,6 @@
 import 'package:flc_swe/components/general/bounding_box.dart';
 import 'package:flc_swe/components/navbar/navbar.dart';
+import 'package:flc_swe/components/navbar/navbar_components.dart';
 import 'package:flc_swe/theme/style.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -12,9 +13,10 @@ class HomePage extends StatelessWidget {
     return ResponsiveBuilder(
       builder: (context, sizingInformation) => Scaffold(
         resizeToAvoidBottomInset: false,
-        // drawer:
-        // sizingInformation.deviceScreenType == DeviceScreenType.mobile ||
-        //     sizingInformation.deviceScreenType == DeviceScreenType.tablet ? NavigationDrawer() : null,
+        drawer: sizingInformation.deviceScreenType == DeviceScreenType.mobile ||
+                sizingInformation.deviceScreenType == DeviceScreenType.tablet
+            ? NavigationDrawer()
+            : null,
         backgroundColor: Colors.white,
         key: _scaffoldKey,
         appBar: PreferredSize(

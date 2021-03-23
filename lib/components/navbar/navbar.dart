@@ -13,9 +13,11 @@ class NavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenTypeLayout(
       mobile: Container(
+          color: Style.theme.primaryColor,
           padding: const EdgeInsets.only(top: 40.0, left: 20.0, right: 20.0),
           child: NavigationBarMobile(scaffoldkey: scaffoldkey)),
       tablet: Container(
+          color: Style.theme.primaryColor,
           padding: const EdgeInsets.only(top: 40.0, left: 45.0, right: 45.0),
           child: NavigationBarTablet(scaffoldkey: scaffoldkey)),
       desktop: Container(
