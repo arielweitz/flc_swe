@@ -64,6 +64,8 @@ flutter:
     - assets/images/hp1.jpg
     - assets/images/hp2.jpg
     - assets/images/FLC_logo.png
+    - assets/images/headshot.png
+    - assets/images/SofiaImage.jpeg
 
   fonts:
     - family: Roboto Condensed

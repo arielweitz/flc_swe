@@ -1,3 +1,4 @@
+import 'package:flc_swe/data/data.dart';
 import 'package:flc_swe/pages/class_page.dart';
 import 'package:flc_swe/pages/class_select_page.dart';
 import 'package:flc_swe/pages/home_page.dart';
@@ -14,22 +15,20 @@ class FluroRouter {
 
   static fluro.Handler _profilesHandler = fluro.Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+    Store obj = Store();
+    var profiles = obj.getProfiles();
     if (params['uid'][0] == '') {
-      return ClassPage(year: params['years'][0]);
+      return ClassPage(
+          year: params['years'][0], profiles: profiles[params['years'][0]]);
     } else {
-      // return ProfilePage();
+      return ProfilePage(
+          profile: profiles[params['years'][0]][params['uid'][0]]);
     }
   });
 
   static fluro.Handler _classesHandler = fluro.Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
-          ClassSelectPage(years: [
-            "2020-2021",
-            "2019-2020",
-            "2018-2019",
-            "2017-2018",
-            "2016-2017"
-          ]));
+          ClassSelectPage());
 
   static void setupRouter() {
     router.define(

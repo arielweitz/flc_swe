@@ -5,18 +5,20 @@ import 'package:flc_swe/components/general/class_button.dart';
 import 'package:flc_swe/components/general/profile_card.dart';
 import 'package:flc_swe/components/navbar/navbar.dart';
 import 'package:flc_swe/components/navbar/navbar_components.dart';
+import 'package:flc_swe/data/data.dart';
 import 'package:flc_swe/theme/style.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class ClassSelectPage extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final Store obj = Store();
+  final List<String> years = [];
 
-  final List<String> years;
-
-  ClassSelectPage({Key key, @required this.years}) : super(key: key);
+  ClassSelectPage({Key key}) : super(key: key);
 
   Widget build(BuildContext context) {
+    years.addAll(obj.getProfiles().keys.toList());
     return ResponsiveBuilder(
       builder: (context, sizingInformation) => Scaffold(
         resizeToAvoidBottomInset: false,

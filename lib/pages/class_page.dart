@@ -4,21 +4,23 @@ import 'package:flc_swe/components/general/bounding_box.dart';
 import 'package:flc_swe/components/general/profile_card.dart';
 import 'package:flc_swe/components/navbar/navbar.dart';
 import 'package:flc_swe/components/navbar/navbar_components.dart';
+import 'package:flc_swe/models/profile.dart';
 import 'package:flc_swe/theme/style.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class ClassPage extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   final String year;
+  final Map<String, Profile> profiles;
   final Map<Color, int> colors = {
     Style.theme.accentColor: 0,
     Style.theme.primaryColor: 0,
     Style.theme.cardColor: 0
   };
 
-  ClassPage({Key key, @required this.year}) : super(key: key);
+  ClassPage({Key key, @required this.year, @required this.profiles})
+      : super(key: key);
 
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
@@ -87,12 +89,12 @@ class ClassPage extends StatelessWidget {
                                   Wrap(
                                     spacing: 30,
                                     runSpacing: 30,
-                                    children: [
-                                      ProfileCard(color: selectRand()),
-                                      ProfileCard(color: selectRand()),
-                                      ProfileCard(color: selectRand()),
-                                      ProfileCard(color: selectRand()),
-                                    ],
+                                    children: makeCards("boardmember"),
+                                    // ProfileCard(color: selectRand()),
+                                    // ProfileCard(color: selectRand()),
+                                    // ProfileCard(color: selectRand()),
+                                    // ProfileCard(color: selectRand()),
+                                    // ,
                                   ),
                                 ],
                               ),
@@ -126,21 +128,7 @@ class ClassPage extends StatelessWidget {
                                   Wrap(
                                     spacing: 30,
                                     runSpacing: 30,
-                                    children: [
-                                      ProfileCard(color: selectRand()),
-                                      ProfileCard(color: selectRand()),
-                                      ProfileCard(color: selectRand()),
-                                      ProfileCard(color: selectRand()),
-                                      ProfileCard(color: selectRand()),
-                                      ProfileCard(color: selectRand()),
-                                      ProfileCard(color: selectRand()),
-                                      ProfileCard(color: selectRand()),
-                                      ProfileCard(color: selectRand()),
-                                      ProfileCard(color: selectRand()),
-                                      ProfileCard(color: selectRand()),
-                                      ProfileCard(color: selectRand()),
-                                      ProfileCard(color: selectRand()),
-                                    ],
+                                    children: makeCards("councilmember"),
                                   ),
                                 ],
                               ),
@@ -174,5 +162,15 @@ class ClassPage extends StatelessWidget {
     Color col = selectables[random.nextInt(selectables.length)];
     colors[col]++;
     return col;
+  }
+
+  List<Widget> makeCards(String type) {
+    List<Widget> cards = [];
+    profiles.values.forEach((v) {
+      if (v.position == type)
+        cards.add(ProfileCard(color: selectRand(), profile: v));
+    });
+
+    return cards;
   }
 }
