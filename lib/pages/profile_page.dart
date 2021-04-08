@@ -14,7 +14,7 @@ class ProfilePage extends StatelessWidget {
   ProfilePage({Key key, @required this.profile}) : super(key: key);
 
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size.height - 180);
+    print(MediaQuery.of(context).size.width);
     return ResponsiveBuilder(
       builder: (context, sizingInformation) => Scaffold(
         resizeToAvoidBottomInset: false,
@@ -27,14 +27,41 @@ class ProfilePage extends StatelessWidget {
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(double.maxFinite),
             child: NavigationBar(scaffoldkey: _scaffoldKey)),
-       body: BoundingBox(
-         child: 
-         ),
+        body: BoundingBox(
+            child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Wrap(
+                runSpacing: 30,
+                spacing: 30,
+                children: [
+                  Container(
+                      color: Colors.red,
+                      height: 600,
+                      width: MediaQuery.of(context).size.width > 1440
+                          ? 1080 / 3
+                          : MediaQuery.of(context).size.width > 1150
+                              ? (MediaQuery.of(context).size.width - 200) / 3
+                              : MediaQuery.of(context).size.width - 100),
+                  Container(
+                      color: Colors.blue,
+                      height: 600,
+                      width: MediaQuery.of(context).size.width > 1440
+                          ? 1080 * 2 / 3
+                          : MediaQuery.of(context).size.width > 1150
+                              ? (MediaQuery.of(context).size.width - 200) *
+                                  2 /
+                                  3
+                              : MediaQuery.of(context).size.width - 100),
+                ],
+              )
+            ],
+          ),
+        )),
       ),
     );
   }
 }
-
 
 // body: BoundingBox(
 //           width: sizingInformation.screenSize.width,
