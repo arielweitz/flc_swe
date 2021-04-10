@@ -36,23 +36,36 @@ class ProfilePage extends StatelessWidget {
                 spacing: 30,
                 children: [
                   Container(
-                      color: Colors.red,
+                      color: Theme.of(context).primaryColor,
                       height: 600,
                       width: MediaQuery.of(context).size.width > 1440
                           ? 1080 / 3
                           : MediaQuery.of(context).size.width > 1150
                               ? (MediaQuery.of(context).size.width - 200) / 3
-                              : MediaQuery.of(context).size.width - 100),
+                              : MediaQuery.of(context).size.width - 100,
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            'assets/images/SofiaImage.jpeg',
+                            height: 200,
+                            width: 300,
+                            fit: BoxFit.fitWidth,
+                          ),
+                          Text('NAME', style: Style.theme.textTheme.headline5),
+                          Row(
+                            children: [],
+                          )
+                        ],
+                      )),
                   Container(
-                      color: Colors.blue,
-                      height: 600,
-                      width: MediaQuery.of(context).size.width > 1440
-                          ? 1080 * 2 / 3
-                          : MediaQuery.of(context).size.width > 1150
-                              ? (MediaQuery.of(context).size.width - 200) *
-                                  2 /
-                                  3
-                              : MediaQuery.of(context).size.width - 100),
+                    color: Theme.of(context).accentColor,
+                    height: 600,
+                    width: MediaQuery.of(context).size.width > 1440
+                        ? 1080 * 2 / 3
+                        : MediaQuery.of(context).size.width > 1150
+                            ? (MediaQuery.of(context).size.width - 200) * 2 / 3
+                            : MediaQuery.of(context).size.width - 100,
+                  ),
                 ],
               )
             ],
