@@ -1,6 +1,7 @@
 import 'package:flc_swe/pages/home_page.dart';
 import 'package:flc_swe/routing/route_names.dart';
 import 'package:flc_swe/routing/router.dart';
+import 'package:flc_swe/services/firebase_auth_service.dart';
 import 'package:flc_swe/theme/style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -1,4 +1,6 @@
+import 'package:flc_swe/models/user.dart';
 import 'package:flc_swe/routing/router.dart';
+import 'package:flc_swe/services/firebase_auth_service.dart';
 import 'package:flc_swe/theme/style.dart';
 import 'package:fluro/fluro.dart' as fluro;
 import 'package:flutter/material.dart';
@@ -32,9 +34,9 @@ class ClickableNavBarItem extends StatelessWidget {
         highlightColor: Colors.transparent,
         focusColor: Colors.transparent,
         onTap: () {
-          // if (this.logOut) {
-          //   context.read<FirebaseAuthService>().signOut();
-          // }
+          if (this.logOut) {
+            context.read<FirebaseAuthService>().signOut();
+          }
           FluroRouter.router.navigateTo(context, route,
               transition: fluro.TransitionType.fadeIn,
               transitionDuration: Duration(milliseconds: 150));
@@ -98,6 +100,19 @@ class NavigationDrawer extends StatelessWidget {
             ClickableNavBarItem(
               child: DrawerItem(title: 'PROFILES', icon: Icons.people),
               route: ClassesRoute,
+            ),
+            Consumer<UserModel>(
+              builder: (context, user, __) {
+                if (user != null) {
+                  return const SizedBox.shrink();
+                } else {
+                  return ClickableNavBarItem(
+                    child:
+                        DrawerItem(title: 'LOGIN', icon: Icons.account_circle),
+                    route: LoginRoute,
+                  );
+                }
+              },
             ),
             // ModalRoute.of(context).settings.name != AccountRoute &&
             //     ModalRoute.of(context).settings.name != OrdersRoute &&
@@ -165,22 +180,25 @@ class NavigationDrawer extends StatelessWidget {
             //   child: DrawerItem(title: 'Settings', icon: Icons.person),
             //   route: SettingsRoute,
             // ) : const SizedBox.shrink(),
-            // Consumer<UserModel>(
-            //   builder: (_, user, __) {
-            //     if (user == null) {
-            //       return const SizedBox.shrink();
-            //     } else {
-            //       return Padding(
-            //         padding: EdgeInsets.only(top: MediaQuery.of(context).size.height - 420.0 >= 0 ? MediaQuery.of(context).size.height - 420.0 : 0),
-            //         child: ClickableNavBarItem(
-            //           child: DrawerItem(title: 'Sign out', icon: Icons.logout),
-            //           route: HomeRoute,
-            //           logOut: true,
-            //         ),
-            //       );
-            //     }
-            //   },
-            // )
+            Consumer<UserModel>(
+              builder: (context, user, __) {
+                if (user == null) {
+                  return const SizedBox.shrink();
+                } else {
+                  return Padding(
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height - 420.0 >= 0
+                            ? MediaQuery.of(context).size.height - 420.0
+                            : 0),
+                    child: ClickableNavBarItem(
+                      child: DrawerItem(title: 'Sign out', icon: Icons.logout),
+                      route: HomeRoute,
+                      logOut: true,
+                    ),
+                  );
+                }
+              },
+            )
           ],
         ),
       ),
