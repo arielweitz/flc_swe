@@ -64,9 +64,16 @@ class HomePage extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("FLC", style: Style.theme.textTheme.headline1),
-                          Text("PROFILES",
-                              style: Style.theme.textTheme.headline2),
+                          Text(
+                            "FLC",
+                            style: Style.theme.textTheme.headline1,
+                            textAlign: TextAlign.center,
+                          ),
+                          Text(
+                            "PROFILES",
+                            style: Style.theme.textTheme.headline2,
+                            textAlign: TextAlign.center,
+                          ),
                         ],
                       ),
                     ),

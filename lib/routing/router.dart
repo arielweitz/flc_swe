@@ -2,6 +2,7 @@ import 'package:flc_swe/data/data.dart';
 import 'package:flc_swe/pages/class_page.dart';
 import 'package:flc_swe/pages/class_select_page.dart';
 import 'package:flc_swe/pages/home_page.dart';
+import 'package:flc_swe/pages/login_page.dart';
 import 'package:flc_swe/pages/profile_page.dart';
 import 'package:fluro/fluro.dart' as fluro;
 import 'package:flutter/material.dart';
@@ -30,6 +31,10 @@ class FluroRouter {
       handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
           ClassSelectPage());
 
+  static fluro.Handler _loginHandler = fluro.Handler(
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
+          LoginPage());
+
   static void setupRouter() {
     router.define(
       '/',
@@ -42,6 +47,14 @@ class FluroRouter {
     router.define(
       '/classes',
       handler: _classesHandler,
+    );
+    router.define(
+      '/login/',
+      handler: _loginHandler,
+    );
+    router.define(
+      '/login',
+      handler: _loginHandler,
     );
     router.define(
       '/profiles/:years/:uid',

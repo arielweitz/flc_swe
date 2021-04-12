@@ -31,16 +31,40 @@ class NavigationBarDesktop extends StatelessWidget {
                 child: NavBarItem(title: 'Profiles'),
                 route: ClassesRoute,
               ),
-              // SizedBox(
-              //   width: 60,
-              // ),
-              // ClickableNavBarItem(
-              //     child: NavBarItem(title: 'About us'),
-              //     route: AboutRoute,
-              // ),
-              // ModalRoute.of(context).settings.name != AccountRoute &&
-              //     ModalRoute.of(context).settings.name != OrdersRoute &&
-              //     ModalRoute.of(context).settings.name != MessagesRoute &&
+              SizedBox(
+                width: 60,
+              ),
+              Consumer<UserModel>(
+                builder: (context, user, __) {
+                  if (user != null) {
+                    return ClickableNavBarItem(
+                      child: NavBarItem(title: 'Log out'),
+                      route: HomeRoute,
+                      logOut: true,
+                    );
+                  } else {
+                    return ClickableNavBarItem(
+                      child: NavBarItem(title: 'Login'),
+                      route: LoginRoute,
+                    );
+                  }
+                },
+              ),
+              // IconButton(
+              //   icon: Icon(Icons.account_circle),
+              //   iconSize: 42.0,
+              //   color: Colors.white,
+              //   onPressed: () {
+              //     FluroRouter.router.navigateTo(
+              //         context,
+              //         LoginRoute,
+              //         transition: fluro.TransitionType.fadeIn,
+              //         transitionDuration: Duration(milliseconds: 150));
+              //   },
+              // )
+              // ModalRoute.of(context).settings.name != HomeRoute &&
+              //     ModalRoute.of(context).settings.name != ProfilesRoute &&
+              //     ModalRoute.of(context).settings.name != ClassesRoute &&
               //     ModalRoute.of(context).settings.name != MyPhonesRoute &&
               //     ModalRoute.of(context).settings.name != SettingsRoute &&
               //     ModalRoute.of(context).settings.name != AddAPhoneRoute &&
@@ -59,26 +83,6 @@ class NavigationBarDesktop extends StatelessWidget {
               //     child: NavBarItem(title: 'Account'),
               //     route: AccountRoute,
               //   ) : const SizedBox.shrink(),
-              // Consumer<UserModel>(
-              //   builder: (_, user, __) {
-              //     if (user == null) {
-              //       return const SizedBox.shrink();
-              //     } else {
-              //       return Row(
-              //         children: [
-              //           SizedBox(
-              //             width: 60,
-              //           ),
-              //           ClickableNavBarItem(
-              //             child: NavBarItem(title: 'Log out'),
-              //             route: HomeRoute,
-              //             logOut: true,
-              //           ),
-              //         ],
-              //       );
-              //     }
-              //   },
-              // )
             ],
           )
         ],

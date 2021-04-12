@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flc_swe/components/general/bounding_box.dart';
-import 'package:flc_swe/components/general/class_button.dart';
+import 'package:flc_swe/components/general/buttons.dart';
 import 'package:flc_swe/components/general/profile_card.dart';
 import 'package:flc_swe/components/navbar/navbar.dart';
 import 'package:flc_swe/components/navbar/navbar_components.dart';

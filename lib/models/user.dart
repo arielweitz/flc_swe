@@ -10,13 +10,12 @@ class UserModel {
   final String lastName;
   final String phoneNumber;
 
-  const UserModel({
-    @required this.uid,
-    this.email,
-    this.photoURL,
-    this.displayName,
-    this.firstName,
-    this.lastName,
-    this.phoneNumber
-  });
+  const UserModel(
+      {this.uid,
+      @required this.email,
+      this.photoURL,
+      this.displayName,
+      this.firstName,
+      this.lastName,
+      this.phoneNumber});
 }
