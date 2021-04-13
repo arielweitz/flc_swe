@@ -31,6 +31,7 @@ class ProfilePage extends StatelessWidget {
             child: SingleChildScrollView(
           child: Column(
             children: [
+              Container(height: 60),
               Wrap(
                 runSpacing: 30,
                 spacing: 30,
@@ -45,15 +46,97 @@ class ProfilePage extends StatelessWidget {
                               : MediaQuery.of(context).size.width - 100,
                       child: Column(
                         children: [
-                          Image.asset(
-                            'assets/images/SofiaImage.jpeg',
-                            height: 200,
-                            width: 300,
-                            fit: BoxFit.fitWidth,
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: ((1080 / 3) - 260) / 2),
+                            child: Image.asset(
+                              'assets/images/SofiaImage.jpeg',
+                              height: 260,
+                              width: 260,
+                              fit: BoxFit.fitWidth,
+                            ),
                           ),
-                          Text('NAME', style: Style.theme.textTheme.headline5),
-                          Row(
-                            children: [],
+                          Container(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: ((1080 / 3) - 260) / 2),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15.0),
+                                      child: Text('NAME',
+                                          style: Style.theme.textTheme.subtitle2
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w500)),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15.0),
+                                      child: Text('YEAR',
+                                          style: Style.theme.textTheme.subtitle2
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w500)),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15.0),
+                                      child: Text('POSITION',
+                                          style: Style.theme.textTheme.subtitle2
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w500)),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15.0),
+                                      child: Text('MAJOR',
+                                          style: Style.theme.textTheme.subtitle2
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w500)),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15.0),
+                                      child: Text('NAME',
+                                          style:
+                                              Style.theme.textTheme.subtitle2),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15.0),
+                                      child: Text('YEAR',
+                                          style:
+                                              Style.theme.textTheme.subtitle2),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15.0),
+                                      child: Text('POSITION',
+                                          style:
+                                              Style.theme.textTheme.subtitle2),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15.0),
+                                      child: Text('MAJOR',
+                                          style:
+                                              Style.theme.textTheme.subtitle2),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
                           )
                         ],
                       )),
@@ -65,6 +148,166 @@ class ProfilePage extends StatelessWidget {
                         : MediaQuery.of(context).size.width > 1150
                             ? (MediaQuery.of(context).size.width - 200) * 2 / 3
                             : MediaQuery.of(context).size.width - 100,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Text('ABOUT ME',
+                                style: Style.theme.textTheme.subtitle2.copyWith(
+                                    fontWeight: FontWeight.w500, fontSize: 32)),
+                          ),
+                          Container(
+                            height: 2,
+                            color: Style.theme.primaryColor,
+                          ),
+                          Center(
+                            child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Wrap(
+                                  alignment: WrapAlignment.center,
+                                  spacing: 30,
+                                  children: [
+                                    ConstrainedBox(
+                                      constraints: BoxConstraints(
+                                        maxWidth:
+                                            MediaQuery.of(context).size.width >
+                                                    1440
+                                                ? 1080 * 2 / 7.5
+                                                : MediaQuery.of(context)
+                                                            .size
+                                                            .width >
+                                                        1150
+                                                    ? (MediaQuery.of(context)
+                                                                .size
+                                                                .width -
+                                                            200) *
+                                                        2 /
+                                                        7.5
+                                                    : (MediaQuery.of(context)
+                                                            .size
+                                                            .width -
+                                                        200),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 15.0),
+                                            child: Text('LOOKING FOR',
+                                                style: Style
+                                                    .theme.textTheme.subtitle2
+                                                    .copyWith(
+                                                        fontWeight:
+                                                            FontWeight.w500)),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 15.0),
+                                            child: Text('A HUG',
+                                                style: Style
+                                                    .theme.textTheme.subtitle2),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    ConstrainedBox(
+                                      constraints: BoxConstraints(
+                                        maxWidth:
+                                            MediaQuery.of(context).size.width >
+                                                    1440
+                                                ? 1080 * 2 / 7.5
+                                                : MediaQuery.of(context)
+                                                            .size
+                                                            .width >
+                                                        1150
+                                                    ? (MediaQuery.of(context)
+                                                                .size
+                                                                .width -
+                                                            200) *
+                                                        2 /
+                                                        7.5
+                                                    : (MediaQuery.of(context)
+                                                            .size
+                                                            .width -
+                                                        200),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 15.0),
+                                            child: Text('FLC COMMITTEES',
+                                                style: Style
+                                                    .theme.textTheme.subtitle2
+                                                    .copyWith(
+                                                        fontWeight:
+                                                            FontWeight.w500)),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 15.0),
+                                            child: Text('ALL OF EM',
+                                                style: Style
+                                                    .theme.textTheme.subtitle2),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15.0),
+                                      child: Text(
+                                          "According to all known laws of aviation, there is no way that a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway. Because bees don’t care what humans think is impossible.",
+                                          style:
+                                              Style.theme.textTheme.subtitle2),
+                                    ),
+                                  ],
+                                )),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Text('CONTACT ME',
+                                style: Style.theme.textTheme.subtitle2.copyWith(
+                                    fontWeight: FontWeight.w500, fontSize: 32)),
+                          ),
+                          Container(
+                            height: 2,
+                            color: Style.theme.primaryColor,
+                          ),
+                          Wrap(
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(Icons.mail,
+                                      color: Colors.white, size: 14),
+                                  Text('test@test.com',
+                                      style: Style.theme.textTheme.bodyText1)
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Icon(Icons.inbox,
+                                      color: Colors.white, size: 14),
+                                  Text('linkedin/test',
+                                      style: Style.theme.textTheme.bodyText1)
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Icon(Icons.call,
+                                      color: Colors.white, size: 14),
+                                  Text('813-###-####',
+                                      style: Style.theme.textTheme.bodyText1)
+                                ],
+                              ),
+                            ],
+                          )
+                        ]),
                   ),
                 ],
               )

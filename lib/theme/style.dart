@@ -48,7 +48,7 @@ class Style {
       subtitle1: TextStyle(
           fontSize: 12.00, fontWeight: FontWeight.w500, color: Colors.black),
       subtitle2: TextStyle(
-          fontSize: 9.00, fontWeight: FontWeight.w700, color: Colors.black),
+          fontSize: 24.00, fontWeight: FontWeight.w300, color: Colors.white),
       bodyText1: TextStyle(
           fontSize: 12.00, fontWeight: FontWeight.w300, color: Colors.white),
       bodyText2: TextStyle(
