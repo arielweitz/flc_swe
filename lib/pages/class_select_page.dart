@@ -94,10 +94,11 @@ class ClassSelectPage extends StatelessWidget {
 
   List<ClassButton> generateButtons() {
     List<ClassButton> buttons = [];
-    for (int i = 0; i < years.length; i++) {
+    for (int i = (years.length - 1); i >= 0; i--) {
       buttons.add(ClassButton(
         year: years[i],
       ));
+      //print(years[i] + ' ' + i.toString());
     }
     return buttons;
   }

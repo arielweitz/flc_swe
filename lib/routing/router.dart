@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flc_swe/data/data.dart';
 import 'package:flc_swe/pages/class_page.dart';
 import 'package:flc_swe/pages/class_select_page.dart';
@@ -11,25 +12,88 @@ class FluroRouter {
   static fluro.FluroRouter router = fluro.FluroRouter();
 
   static fluro.Handler _homehandler = fluro.Handler(
-      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
-          HomePage());
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+    Store obj = Store();
+    //Future<bool> _resp = obj.setProfiles();
+    return FutureBuilder<QuerySnapshot>(
+      // Initialize FlutterFire:
+      future: obj.fbProfiles(),
+      builder: (context, snapshot) {
+        // Check for errors
+        if (snapshot.hasError) {
+          return Text(snapshot.error.toString());
+        }
+
+        // Once complete, show your application
+        if (snapshot.connectionState == ConnectionState.done) {
+          obj.setProfiles(snapshot.data);
+          return HomePage();
+        }
+
+        // Otherwise, show something whilst waiting for initialization to complete
+        return CircularProgressIndicator();
+      },
+    );
+  });
 
   static fluro.Handler _profilesHandler = fluro.Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) {
     Store obj = Store();
-    var profiles = obj.getProfiles();
-    if (params['uid'][0] == '') {
-      return ClassPage(
-          year: params['years'][0], profiles: profiles[params['years'][0]]);
-    } else {
-      return ProfilePage(
-          profile: profiles[params['years'][0]][params['uid'][0]]);
-    }
+
+    return FutureBuilder<QuerySnapshot>(
+      // Initialize FlutterFire:
+      future: obj.fbProfiles(),
+      builder: (context, snapshot) {
+        // Check for errors
+        if (snapshot.hasError) {
+          return Text(snapshot.error.toString());
+        }
+
+        // Once complete, show your application
+        if (snapshot.connectionState == ConnectionState.done) {
+          obj.setProfiles(snapshot.data);
+          var profiles = obj.getProfiles();
+          if (params['uid'][0] == '') {
+            return ClassPage(
+                year: params['years'][0],
+                profiles: profiles[params['years'][0]]);
+          } else {
+            return ProfilePage(
+                profile: profiles[params['years'][0]][params['uid'][0]]);
+          }
+        }
+
+        // Otherwise, show something whilst waiting for initialization to complete
+        return CircularProgressIndicator();
+      },
+    );
   });
 
   static fluro.Handler _classesHandler = fluro.Handler(
-      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
-          ClassSelectPage());
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+    Store obj = Store();
+    //Future<bool> _resp = obj.setProfiles();
+    return FutureBuilder<QuerySnapshot>(
+      // Initialize FlutterFire:
+      future: obj.fbProfiles(),
+      builder: (context, snapshot) {
+        // Check for errors
+        if (snapshot.hasError) {
+          return Text(snapshot.error.toString());
+        }
+
+        // Once complete, show your application
+        if (snapshot.hasData) {
+          obj.setProfiles(snapshot.data);
+          print(obj.getProfiles());
+          return ClassSelectPage();
+        }
+
+        // Otherwise, show something whilst waiting for initialization to complete
+        return CircularProgressIndicator();
+      },
+    );
+  });
 
   static fluro.Handler _loginHandler = fluro.Handler(
       handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
