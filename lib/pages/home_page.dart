@@ -9,7 +9,6 @@ class HomePage extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size.height - 120);
     return ResponsiveBuilder(
       builder: (context, sizingInformation) => Scaffold(
         resizeToAvoidBottomInset: false,

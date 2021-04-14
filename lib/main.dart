@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flc_swe/pages/home_page.dart';
 import 'package:flc_swe/routing/route_names.dart';
 import 'package:flc_swe/routing/router.dart';
@@ -23,15 +24,45 @@ void main() {
 
 class FLC extends StatelessWidget {
   // This widget is the root of your application.
+  // Widget build(BuildContext context) {
+  // return MaterialApp(
+  //   title: 'FLC',
+  //   debugShowCheckedModeBanner: false,
+  //   theme: Style.theme,
+  //   //initialRoute: HomeRoute,
+  //   home: HomePage(),
+  //   onGenerateRoute: FluroRouter.router.generator,
+  // );
+  // }
+
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'FLC',
-      debugShowCheckedModeBanner: false,
-      theme: Style.theme,
-      //initialRoute: HomeRoute,
-      home: HomePage(),
-      onGenerateRoute: FluroRouter.router.generator,
+    return FutureBuilder(
+      // Initialize FlutterFire:
+      future: _initialization,
+      builder: (context, snapshot) {
+        // Check for errors
+        if (snapshot.hasError) {
+          return Text(snapshot.error.toString());
+        }
+
+        // Once complete, show your application
+        if (snapshot.connectionState == ConnectionState.done) {
+          return MaterialApp(
+            title: 'FLC',
+            debugShowCheckedModeBanner: false,
+            theme: Style.theme,
+            initialRoute: HomeRoute,
+            //home: HomePage(),
+            onGenerateRoute: FluroRouter.router.generator,
+          );
+        }
+
+        // Otherwise, show something whilst waiting for initialization to complete
+        return CircularProgressIndicator();
+      },
     );
   }
 }
