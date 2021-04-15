@@ -281,29 +281,56 @@ class ProfilePage extends StatelessWidget {
                           ),
                           Wrap(
                             children: [
-                              Row(
-                                children: [
-                                  Icon(Icons.mail,
-                                      color: Colors.white, size: 14),
-                                  Text('test@test.com',
-                                      style: Style.theme.textTheme.bodyText1)
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Icon(Icons.inbox,
-                                      color: Colors.white, size: 14),
-                                  Text('linkedin/test',
-                                      style: Style.theme.textTheme.bodyText1)
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Icon(Icons.call,
-                                      color: Colors.white, size: 14),
-                                  Text('813-###-####',
-                                      style: Style.theme.textTheme.bodyText1)
-                                ],
+                              Container(
+                                color: Theme.of(context).primaryColor,
+                                height: 60,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(Icons.mail,
+                                            color: Colors.white, size: 14),
+                                        Text(
+                                          'test@test.com',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w300,
+                                              //fontStyle: FontStyle.italic,
+                                              fontFamily: 'Roboto Condensed',
+                                              fontSize: 14),
+                                        )
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon(Icons.inbox,
+                                            color: Colors.white, size: 14),
+                                        Text('linkedin/test',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w300,
+                                                //fontStyle: FontStyle.italic,
+                                                fontFamily: 'Roboto Condensed',
+                                                fontSize: 14)),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon(Icons.call,
+                                            color: Colors.white, size: 14),
+                                        Text('813-###-####',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w300,
+                                                //fontStyle: FontStyle.italic,
+                                                fontFamily: 'Roboto Condensed',
+                                                fontSize: 14)),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           )
