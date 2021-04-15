@@ -1,7 +1,7 @@
 import 'package:flc_swe/theme/style.dart';
 import 'package:flutter/material.dart';
 
-enum InputType { Email, Password, Text, Phone, Multiline }
+enum InputType { Email, UFLEmail, Password, Text, Phone, Multiline, Year }
 
 class InputField extends StatefulWidget {
   final String text;
@@ -52,13 +52,16 @@ class _InputFieldState extends State<InputField> {
         ),
         style: Theme.of(context).textTheme.subtitle1.copyWith(height: 1.5),
         obscureText: widget.type == InputType.Password ? true : false,
-        keyboardType: widget.type == InputType.Email
-            ? TextInputType.emailAddress
-            : widget.type == InputType.Phone
-                ? TextInputType.phone
-                : widget.type == InputType.Multiline
-                    ? TextInputType.multiline
-                    : TextInputType.text,
+        keyboardType:
+            widget.type == InputType.Email || widget.type == InputType.UFLEmail
+                ? TextInputType.emailAddress
+                : widget.type == InputType.Phone
+                    ? TextInputType.phone
+                    : widget.type == InputType.Multiline
+                        ? TextInputType.multiline
+                        : widget.type == InputType.Year
+                            ? TextInputType.number
+                            : TextInputType.text,
         cursorColor: Style.theme.primaryColor,
         cursorWidth: 2.0,
         minLines: widget.type == InputType.Multiline ? 5 : 1,
@@ -72,18 +75,43 @@ class _InputFieldState extends State<InputField> {
             return !vowels.contains(widget.text.toLowerCase()[0])
                 ? 'Please enter a ${widget.text.toLowerCase()}.'
                 : 'Please enter an ${widget.text.toLowerCase()}';
-          } else if (widget.type == InputType.Email) {
+          } else if (widget.type == InputType.Email ||
+              widget.type == InputType.UFLEmail) {
             final RegExp _emailRegExp = RegExp(
               r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$',
             );
             if (!_emailRegExp.hasMatch(value)) {
               return 'Please enter a valid email.';
             }
+            if (widget.type == InputType.UFLEmail &&
+                !(value.toLowerCase().contains('ufl.edu'))) {
+              return 'Please enter a valid email.';
+            }
           } else if (widget.type == InputType.Password) {
             if (value.length < 6) {
               return 'Your password must be at least 6 characters.';
             }
+          } else if (widget.type == InputType.Year) {
+            final RegExp _numeric = RegExp(
+              r'^\d{4}$',
+            );
+            if (!_numeric.hasMatch(value)) {
+              return 'Please enter a valid year.';
+            } else if (value.length != 4) {
+              return 'Please enter a valid year.';
+            }
+          } else if (widget.type == InputType.Phone) {
+            final RegExp _phone = RegExp(
+              r'^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$',
+            );
+            final RegExp _phone2 = RegExp(
+              r'^\d{10}$',
+            );
+            if (!_phone.hasMatch(value) && !_phone2.hasMatch(value)) {
+              return 'Please enter a valid phone number.';
+            }
           }
+          //^\d{4}$
           setState(() {
             _valid = true;
           });

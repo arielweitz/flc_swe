@@ -37,6 +37,27 @@ class NavigationBarDesktop extends StatelessWidget {
               Consumer<UserModel>(
                 builder: (context, user, __) {
                   if (user != null) {
+                    return Row(
+                      children: [
+                        ClickableNavBarItem(
+                          child: NavBarItem(title: 'Admin'),
+                          route: AdminRoute,
+                        ),
+                        SizedBox(
+                          width: 60,
+                        ),
+                      ],
+                    );
+                  } else {
+                    return SizedBox(
+                      width: 0,
+                    );
+                  }
+                },
+              ),
+              Consumer<UserModel>(
+                builder: (context, user, __) {
+                  if (user != null) {
                     return ClickableNavBarItem(
                       child: NavBarItem(title: 'Log out'),
                       route: HomeRoute,
@@ -50,6 +71,7 @@ class NavigationBarDesktop extends StatelessWidget {
                   }
                 },
               ),
+
               // IconButton(
               //   icon: Icon(Icons.account_circle),
               //   iconSize: 42.0,
