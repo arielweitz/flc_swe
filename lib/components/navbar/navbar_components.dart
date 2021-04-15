@@ -114,6 +114,20 @@ class NavigationDrawer extends StatelessWidget {
                 }
               },
             ),
+            Consumer<UserModel>(
+              builder: (context, user, __) {
+                if (user != null) {
+                  return ClickableNavBarItem(
+                    child: DrawerItem(title: 'ADMIN', icon: Icons.settings),
+                    route: AdminRoute,
+                  );
+                } else {
+                  return SizedBox(
+                    width: 0,
+                  );
+                }
+              },
+            ),
             // ModalRoute.of(context).settings.name != AccountRoute &&
             //     ModalRoute.of(context).settings.name != OrdersRoute &&
             //     ModalRoute.of(context).settings.name != MessagesRoute &&
@@ -187,8 +201,8 @@ class NavigationDrawer extends StatelessWidget {
                 } else {
                   return Padding(
                     padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height - 420.0 >= 0
-                            ? MediaQuery.of(context).size.height - 420.0
+                        top: MediaQuery.of(context).size.height - 540.0 >= 0
+                            ? MediaQuery.of(context).size.height - 540.0
                             : 0),
                     child: ClickableNavBarItem(
                       child: DrawerItem(title: 'Sign out', icon: Icons.logout),

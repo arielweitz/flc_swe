@@ -33,59 +33,52 @@ class ClassSelectPage extends StatelessWidget {
             child: NavigationBar(scaffoldkey: _scaffoldKey)),
         body: BoundingBox(
           width: sizingInformation.screenSize.width,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 40.0),
-                child: Text(
-                  "CLASSES",
-                  style: Style.theme.textTheme.headline3,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 40.0),
+                  child: Text(
+                    "CLASSES",
+                    style: Style.theme.textTheme.headline3,
+                  ),
                 ),
-              ),
-              Expanded(
-                child: SingleChildScrollView(
+                SizedBox(
+                  width: sizingInformation.screenSize.width > 1000
+                      ? ((1000 / 260).floor() * 260 +
+                              ((1000 / 260).floor() - 1) * 30.0) +
+                          80
+                      : sizingInformation.screenSize.width,
                   child: Column(
                     children: [
                       SizedBox(
                         width: sizingInformation.screenSize.width > 1000
-                            ? ((1000 / 260).floor() * 260 +
-                                    ((1000 / 260).floor() - 1) * 30.0) +
-                                80
-                            : sizingInformation.screenSize.width,
+                            ? (1000 / 260).floor() * 260 +
+                                ((1000 / 260).floor() - 1) * 30.0
+                            : (sizingInformation.screenSize.width / 260)
+                                        .floor() *
+                                    260 +
+                                ((sizingInformation.screenSize.width / 260)
+                                            .floor() -
+                                        1) *
+                                    30.0,
                         child: Column(
                           children: [
-                            SizedBox(
-                              width: sizingInformation.screenSize.width > 1000
-                                  ? (1000 / 260).floor() * 260 +
-                                      ((1000 / 260).floor() - 1) * 30.0
-                                  : (sizingInformation.screenSize.width / 260)
-                                              .floor() *
-                                          260 +
-                                      ((sizingInformation.screenSize.width /
-                                                      260)
-                                                  .floor() -
-                                              1) *
-                                          30.0,
-                              child: Column(
-                                children: [
-                                  Wrap(
-                                    alignment: WrapAlignment.center,
-                                    spacing: 10,
-                                    runSpacing: 10,
-                                    children: generateButtons(),
-                                  ),
-                                ],
-                              ),
+                            Wrap(
+                              alignment: WrapAlignment.center,
+                              spacing: 10,
+                              runSpacing: 10,
+                              children: generateButtons(),
                             ),
-                            Container(height: 40),
                           ],
                         ),
-                      )
+                      ),
+                      Container(height: 40),
                     ],
                   ),
-                ),
-              ),
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -94,7 +87,8 @@ class ClassSelectPage extends StatelessWidget {
 
   List<ClassButton> generateButtons() {
     List<ClassButton> buttons = [];
-    for (int i = (years.length - 1); i >= 0; i--) {
+    years.sort((b, a) => a.compareTo(b));
+    for (int i = 0; i < years.length; i++) {
       buttons.add(ClassButton(
         year: years[i],
       ));

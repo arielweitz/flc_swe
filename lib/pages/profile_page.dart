@@ -73,7 +73,7 @@ class ProfilePage extends StatelessWidget {
                                                   fit: BoxFit.cover,
                                                   alignment: FractionalOffset
                                                       .topCenter,
-                                                  image: AssetImage(
+                                                  image: NetworkImage(
                                                       profile.imageURL),
                                                 )),
                                                 // child: profile.image, height: 200, width: 200)

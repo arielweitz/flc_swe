@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flc_swe/data/data.dart';
+import 'package:flc_swe/models/user.dart';
+import 'package:flc_swe/pages/admin_page.dart';
 import 'package:flc_swe/pages/class_page.dart';
 import 'package:flc_swe/pages/class_select_page.dart';
 import 'package:flc_swe/pages/home_page.dart';
@@ -7,6 +9,7 @@ import 'package:flc_swe/pages/login_page.dart';
 import 'package:flc_swe/pages/profile_page.dart';
 import 'package:fluro/fluro.dart' as fluro;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class FluroRouter {
   static fluro.FluroRouter router = fluro.FluroRouter();
@@ -83,9 +86,9 @@ class FluroRouter {
         }
 
         // Once complete, show your application
-        if (snapshot.hasData) {
+        if (snapshot.connectionState == ConnectionState.done) {
           obj.setProfiles(snapshot.data);
-          print(obj.getProfiles());
+          //print(obj.getProfiles());
           return ClassSelectPage();
         }
 
@@ -93,6 +96,59 @@ class FluroRouter {
         return CircularProgressIndicator();
       },
     );
+  });
+
+  static fluro.Handler _adminHandler = fluro.Handler(
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+    Store obj = Store();
+    return Consumer<UserModel>(
+      builder: (context, user, __) {
+        if (user != null) {
+          return FutureBuilder<QuerySnapshot>(
+            // Initialize FlutterFire:
+            future: obj.fbProfiles(),
+            builder: (context, snapshot) {
+              // Check for errors
+              if (snapshot.hasError) {
+                return Text(snapshot.error.toString());
+              }
+
+              // Once complete, show your application
+              if (snapshot.connectionState == ConnectionState.done) {
+                obj.setProfiles(snapshot.data);
+                //print(obj.getProfiles());
+                return AdminPage();
+              }
+
+              // Otherwise, show something whilst waiting for initialization to complete
+              return CircularProgressIndicator();
+            },
+          );
+        } else {
+          return FutureBuilder<QuerySnapshot>(
+            // Initialize FlutterFire:
+            future: obj.fbProfiles(),
+            builder: (context, snapshot) {
+              // Check for errors
+              if (snapshot.hasError) {
+                return Text(snapshot.error.toString());
+              }
+
+              // Once complete, show your application
+              if (snapshot.connectionState == ConnectionState.done) {
+                obj.setProfiles(snapshot.data);
+                return HomePage();
+              }
+
+              // Otherwise, show something whilst waiting for initialization to complete
+              return CircularProgressIndicator();
+            },
+          );
+        }
+      },
+    );
+
+    //Future<bool> _resp = obj.setProfiles();
   });
 
   static fluro.Handler _loginHandler = fluro.Handler(
@@ -119,6 +175,14 @@ class FluroRouter {
     router.define(
       '/login',
       handler: _loginHandler,
+    );
+    router.define(
+      '/admin/',
+      handler: _adminHandler,
+    );
+    router.define(
+      '/admin',
+      handler: _adminHandler,
     );
     router.define(
       '/profiles/:years/:uid',
