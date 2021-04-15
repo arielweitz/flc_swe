@@ -13,6 +13,8 @@ class Profile {
   final String imageURL;
   final String position;
   final String standing;
+  final String committees;
+  final List<String> lookingFor;
 
   Profile(
       {this.name,
@@ -25,5 +27,7 @@ class Profile {
       this.years,
       this.imageURL,
       this.position,
-      this.standing});
+      this.standing,
+      this.committees,
+      this.lookingFor});
 }

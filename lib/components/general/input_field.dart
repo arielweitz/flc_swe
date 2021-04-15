@@ -89,7 +89,7 @@ class _InputFieldState extends State<InputField> {
             }
           } else if (widget.type == InputType.Password) {
             if (value.length < 6) {
-              return 'Your password must be at least 6 characters.';
+              return 'Invalid password.';
             }
           } else if (widget.type == InputType.Year) {
             final RegExp _numeric = RegExp(

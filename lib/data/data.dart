@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flc_swe/models/profile.dart';
+import 'dart:html';
+import 'package:firebase/firebase.dart' as fb;
 import 'package:flutter/material.dart';
+import 'dart:io' as io;
 
 class Store {
   static Map<String, Map<String, Profile>> profiles = {};
@@ -27,19 +30,21 @@ class Store {
         id = key.toString();
         //print(yr);
         //print(id);
+        //print(List<String>.from(value['lookingFor']).runtimeType);
         profMap[id] = Profile(
-          name: value['name'].toString(),
-          standing: value['standing'].toString(),
-          uid: value['uid'].toString(),
-          years: value['years'].toString(),
-          position: value['position'].toString(),
-          imageURL: value['imageURL'].toString(),
-          email: value['email'].toString(),
-          bio: value['bio'].toString(),
-          phone: value['phone'].toString(),
-          major: value['major'].toString(),
-          linkedin: value['linkedin'].toString(),
-        );
+            name: value['name'].toString(),
+            standing: value['standing'].toString(),
+            uid: value['uid'].toString(),
+            years: value['years'].toString(),
+            position: value['position'].toString(),
+            imageURL: value['imageURL'].toString(),
+            email: value['email'].toString(),
+            bio: value['bio'].toString(),
+            phone: value['phone'].toString(),
+            major: value['major'].toString(),
+            linkedin: value['linkedin'].toString(),
+            committees: value['committees'].toString(),
+            lookingFor: List<String>.from(value['lookingFor']));
         //print(profMap.length);
       });
       profiles[yr] = profMap;
@@ -62,7 +67,9 @@ class Store {
         'phone': p.phone,
         'linkedin': p.linkedin,
         'major': p.major,
-        'email': p.email
+        'email': p.email,
+        'committees': p.committees,
+        'lookingFor': p.lookingFor
       },
     }, SetOptions(merge: true)).then((_) {
       print("success!");
@@ -100,5 +107,37 @@ class Store {
 
     profilesRef.delete();
     await fbProfiles().then((obj) => setProfiles(obj));
+  }
+
+  /*
+  * Function to upload image from files
+  */
+  void uploadImage({@required Function(File file) onSelected}) {
+    /* Opens file selector window upon click */
+    InputElement uploadInput = FileUploadInputElement()..accept = 'image/*';
+    uploadInput.click();
+
+    /* 
+    * Waits for a change from input element
+    * to begin uploading image
+    */
+    uploadInput.onChange.listen((event) {
+      final file =
+          uploadInput.files.first; /* Refers to first file selected in window */
+      final reader = FileReader(); /* Asynchronously read file contents */
+      reader.readAsDataUrl(file); /* File is read as a URL */
+      reader.onLoadEnd.listen((event) {
+        /* Wait for file upload to finish */
+        onSelected(file);
+      });
+    });
+  }
+
+  Future<Uri> addImageToStore(String year, String uid, File file) async {
+    fb.StorageReference ref = await fb.storage().ref().child('$year/$uid');
+    fb.UploadTask uploadTask = await ref.put(file);
+    Future<Uri> temp;
+    await uploadTask.future.whenComplete(() => temp = ref.getDownloadURL());
+    return temp;
   }
 }

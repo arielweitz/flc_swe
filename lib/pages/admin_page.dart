@@ -1,7 +1,10 @@
+import 'dart:html';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flc_swe/components/general/bounding_box.dart';
 import 'package:flc_swe/components/general/buttons.dart';
 import 'package:flc_swe/components/general/input_field.dart';
+import 'package:flc_swe/components/general/multiple_select_buttons.dart';
 import 'package:flc_swe/components/general/one_select_buttons.dart';
 import 'package:flc_swe/components/general/profile_card.dart';
 import 'package:flc_swe/components/navbar/navbar.dart';
@@ -96,7 +99,6 @@ class AdminPage extends StatelessWidget {
       buttons.add(ClassAdminButton(
         text: years[i],
       ));
-      //print(years[i] + ' ' + i.toString());
     }
     buttons.add(ClassAdminButton(
       text: '+',
@@ -199,19 +201,6 @@ class AddYear extends StatelessWidget {
                                                           color: Colors.white)),
                                             )));
                                   }
-
-                                  // FirebaseAuth.instance
-                                  //     .authStateChanges()
-                                  //     .listen((User user) {
-                                  //   if (user != null) {
-                                  //     FluroRouter.router.navigateTo(
-                                  //         context, HomeRoute,
-                                  //         transition:
-                                  //             fluro.TransitionType.fadeIn,
-                                  //         transitionDuration:
-                                  //             Duration(milliseconds: 150));
-                                  //   }
-                                  // });
                                 }
                               })
                         ],
@@ -408,7 +397,7 @@ class EditProfile extends StatefulWidget {
   final GlobalKey<FormState> _profileKey = GlobalKey<FormState>();
   final Map<String, TextEditingController> _controllers = {
     'name': TextEditingController(),
-    //'id': TextEditingController(),
+    'committees': TextEditingController(),
     'major': TextEditingController(),
     //year is passed in
     'bio': TextEditingController(),
@@ -416,6 +405,12 @@ class EditProfile extends StatefulWidget {
     'phone': TextEditingController(),
     'linkedin': TextEditingController()
   };
+  final List<String> standingOptions = [
+    "Freshman",
+    "Sophomore",
+    "Junior",
+    "Senior"
+  ];
   EditProfile({Key key, @required this.years, @required this.profile})
       : super(key: key);
   @override
@@ -424,9 +419,20 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   //name, id, major, position, year, bio, list of LOOKING FOR, list of committees, phone, email, lnkedin
+  ////looking for internship, work, research, volunteer opportunities, mentorship, involvement opportunities
+  ///committees
 
+  File image;
   String position;
   String standing;
+  Map<String, bool> lookingFor = {
+    'Internship': false,
+    'Work': false,
+    'Research': false,
+    'Volunteer opportunities': false,
+    'Mentorship': false,
+    'Involvement opportunities': false
+  };
 
   @override
   void initState() {
@@ -437,10 +443,17 @@ class _EditProfileState extends State<EditProfile> {
       widget._controllers["email"].text = widget.profile.email;
       widget._controllers["phone"].text = widget.profile.phone;
       widget._controllers["linkedin"].text = widget.profile.linkedin;
+      widget._controllers["committees"].text = widget.profile.committees;
     }
     setState(() {
       position = widget.profile != null ? widget.profile.position : "";
       standing = widget.profile != null ? widget.profile.standing : "";
+      for (int i = 0;
+          i < (widget.profile != null ? widget.profile.lookingFor.length : 0);
+          i++) {
+        if (widget.profile.lookingFor != null)
+          lookingFor[widget.profile.lookingFor[i]] = true;
+      }
     });
     super.initState();
   }
@@ -500,16 +513,32 @@ class _EditProfileState extends State<EditProfile> {
                           OneSelectList(
                             title: "Standing",
                             chosen: standing,
-                            options: [
-                              "Freshman",
-                              "Sophmore",
-                              "Junior",
-                              "Senior"
-                            ],
+                            options: widget.standingOptions,
                             onPressed: (String name) => setState(() {
                               standing = name;
                             }),
                           ),
+                          MultipleSelectList(
+                            title: "Looking For",
+                            options: lookingFor,
+                            onPressed: (String name, bool chosen) =>
+                                setState(() {
+                              lookingFor[name] = chosen;
+                            }),
+                          ),
+                          PrimaryButton(
+                              title: "Select Image",
+                              onPressed: () async {
+                                Store obj = Store();
+                                await obj.uploadImage(
+                                    onSelected: (newFile) => setState(() {
+                                          image = newFile;
+                                        }));
+                              }),
+                          InputField(
+                              text: 'Committees',
+                              controller: widget._controllers['committees'],
+                              type: InputType.Text),
                           InputField(
                               text: 'Major',
                               controller: widget._controllers['major'],
@@ -548,6 +577,16 @@ class _EditProfileState extends State<EditProfile> {
                                     if (widget._profileKey.currentState
                                         .validate()) {
                                       try {
+                                        Store obj = Store();
+                                        Uri url = await obj.addImageToStore(
+                                            widget.years,
+                                            widget._controllers['email'].text
+                                                .substring(
+                                                    0,
+                                                    widget._controllers['email']
+                                                        .text
+                                                        .indexOf('@')),
+                                            image);
                                         Profile temp = Profile(
                                           name:
                                               widget._controllers['name'].text,
@@ -569,9 +608,13 @@ class _EditProfileState extends State<EditProfile> {
                                                       .indexOf('@')),
                                           years: widget.years,
                                           standing: standing,
-                                          imageURL: "_link_",
+                                          imageURL: url.toString(),
+                                          committees: widget
+                                              ._controllers['committees'].text,
+                                          lookingFor:
+                                              getMultipleChosen(lookingFor),
                                         );
-                                        Store obj = Store();
+
                                         await obj.addProfileInfo(temp);
                                         Navigator.push(
                                           context,
@@ -665,5 +708,14 @@ class _EditProfileState extends State<EditProfile> {
         ),
       ),
     );
+  }
+
+  List<String> getMultipleChosen(Map<String, bool> choices) {
+    List<String> chosen = [];
+    choices.forEach((k, v) {
+      if (v) chosen.add(k.toString());
+    });
+    //print(chosen);
+    return chosen;
   }
 }
