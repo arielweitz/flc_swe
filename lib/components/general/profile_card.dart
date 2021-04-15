@@ -242,9 +242,9 @@ class ProfileAdminCard extends StatelessWidget {
                             ),
                             color: Colors.white,
                             hoverColor: Colors.grey.withAlpha(70),
-                            onPressed: () {
+                            onPressed: () async {
                               Store obj = Store();
-                              obj.deleteProfile(profile);
+                              await obj.deleteProfile(profile);
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(

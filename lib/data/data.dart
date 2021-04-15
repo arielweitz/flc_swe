@@ -48,7 +48,7 @@ class Store {
     });
   }
 
-  void addProfileInfo(Profile p) {
+  void addProfileInfo(Profile p) async {
     FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
     firestoreInstance.collection('profiles').doc(p.years).set({
       p.uid: {
@@ -68,7 +68,7 @@ class Store {
       print("success!");
     });
 
-    fbProfiles().then((obj) => setProfiles(obj));
+    await fbProfiles().then((obj) => setProfiles(obj));
   }
 
   void addYearGroup(String title) {
@@ -83,13 +83,13 @@ class Store {
     fbProfiles().then((obj) => setProfiles(obj));
   }
 
-  void deleteProfile(Profile p) {
+  void deleteProfile(Profile p) async {
     FirebaseFirestore db = FirebaseFirestore.instance;
     var profilesRef = db.collection('profiles').doc(p.years);
 
     profilesRef.update({p.uid: FieldValue.delete()});
 
-    fbProfiles().then((obj) => setProfiles(obj));
+    await fbProfiles().then((obj) => setProfiles(obj));
   }
 
   void deleteYear(String year) async {

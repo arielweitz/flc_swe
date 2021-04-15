@@ -572,7 +572,7 @@ class _EditProfileState extends State<EditProfile> {
                                           imageURL: "_link_",
                                         );
                                         Store obj = Store();
-                                        obj.addProfileInfo(temp);
+                                        await obj.addProfileInfo(temp);
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
