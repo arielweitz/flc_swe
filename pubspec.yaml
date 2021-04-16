@@ -68,7 +68,6 @@ flutter:
     - assets/images/SofiaImage.jpeg
 
   fonts:
-    - asset: assets/fonts/CustomIcon.ttf
     - family: Roboto Condensed
       fonts:
         - asset: assets/fonts/RobotoCondensed/RobotoCondensed-Regular.ttf

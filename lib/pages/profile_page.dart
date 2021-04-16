@@ -34,27 +34,38 @@ class ProfilePage extends StatelessWidget {
               Container(height: 60),
               Wrap(
                 runSpacing: 30,
-                spacing: 30,
+                spacing: 40,
                 children: [
                   Container(
                       color: Theme.of(context).primaryColor,
                       height: 600,
                       width: MediaQuery.of(context).size.width > 1440
                           ? 1080 / 3
-                          : MediaQuery.of(context).size.width > 1150
-                              ? (MediaQuery.of(context).size.width - 200) / 3
-                              : MediaQuery.of(context).size.width - 100,
+                          : MediaQuery.of(context).size.width > 1225 //1150
+                              ? (MediaQuery.of(context).size.width - 350) /
+                                  3 // - 200
+                              : MediaQuery.of(context).size.width > 1100
+                                  ? (MediaQuery.of(context).size.width - 200) /
+                                      3
+                                  : MediaQuery.of(context).size.width > 900
+                                      ? MediaQuery.of(context).size.width - 500
+                                      : MediaQuery.of(context).size.width - 100,
                       child: Column(
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(
                                 top: ((1080 / 3) - 260) / 2),
-                            child: Image.asset(
-                              'assets/images/SofiaImage.jpeg',
-                              height: 260,
-                              width: 260,
-                              fit: BoxFit.fitWidth,
-                            ),
+                            child: Image.asset('assets/images/SofiaImage.jpeg',
+                                height: 260,
+                                //260
+                                width: MediaQuery.of(context).size.width > 1440
+                                    ? 260
+                                    : MediaQuery.of(context).size.width > 1100
+                                        ? (MediaQuery.of(context).size.width -
+                                                200) /
+                                            3
+                                        : 260,
+                                fit: BoxFit.fitWidth),
                           ),
                           Container(
                             height: 20,
@@ -142,10 +153,12 @@ class ProfilePage extends StatelessWidget {
                       )),
                   Container(
                     color: Theme.of(context).accentColor,
-                    height: 600,
+                    //600
+                    height:
+                        MediaQuery.of(context).size.width < 1150 ? 700 : 600,
                     width: MediaQuery.of(context).size.width > 1440
                         ? 1080 * 2 / 3
-                        : MediaQuery.of(context).size.width > 1150
+                        : MediaQuery.of(context).size.width > 1100 //1150
                             ? (MediaQuery.of(context).size.width - 200) * 2 / 3
                             : MediaQuery.of(context).size.width - 100,
                     child: Column(
@@ -166,6 +179,7 @@ class ProfilePage extends StatelessWidget {
                                 padding: const EdgeInsets.all(15.0),
                                 child: Wrap(
                                   alignment: WrapAlignment.center,
+                                  crossAxisAlignment: WrapCrossAlignment.center,
                                   spacing: 30,
                                   children: [
                                     ConstrainedBox(
@@ -189,9 +203,10 @@ class ProfilePage extends StatelessWidget {
                                                             .width -
                                                         200),
                                       ),
+                                      // looking for row
                                       child: Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
+                                            MainAxisAlignment.spaceEvenly,
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.symmetric(
@@ -200,15 +215,48 @@ class ProfilePage extends StatelessWidget {
                                                 style: Style
                                                     .theme.textTheme.subtitle2
                                                     .copyWith(
+                                                        fontSize: 20,
                                                         fontWeight:
                                                             FontWeight.w500)),
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 15.0),
-                                            child: Text('A HUG',
-                                                style: Style
-                                                    .theme.textTheme.subtitle2),
+                                          Wrap(
+                                            direction: Axis.vertical,
+                                            spacing: 5.0,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 2.0),
+                                                child: Text('Internship',
+                                                    style: Style.theme.textTheme
+                                                        .subtitle2
+                                                        .copyWith(
+                                                      fontSize: 18,
+                                                    )),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 2.0),
+                                                child: Text('Volunteering',
+                                                    style: Style.theme.textTheme
+                                                        .subtitle2
+                                                        .copyWith(
+                                                      fontSize: 18,
+                                                    )),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 2.0),
+                                                child: Text('Mentorship',
+                                                    style: Style.theme.textTheme
+                                                        .subtitle2
+                                                        .copyWith(
+                                                      fontSize: 18,
+                                                    )),
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
@@ -245,22 +293,41 @@ class ProfilePage extends StatelessWidget {
                                                 style: Style
                                                     .theme.textTheme.subtitle2
                                                     .copyWith(
+                                                        fontSize: 20,
                                                         fontWeight:
                                                             FontWeight.w500)),
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 15.0),
-                                            child: Text('ALL OF EM',
-                                                style: Style
-                                                    .theme.textTheme.subtitle2),
-                                          )
+                                          Wrap(
+                                              direction: Axis.vertical,
+                                              spacing: 5.0,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(vertical: 2.0),
+                                                  child: Text('REPGainesville',
+                                                      style: Style.theme
+                                                          .textTheme.subtitle2
+                                                          .copyWith(
+                                                        fontSize: 18,
+                                                      )),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(vertical: 2.0),
+                                                  child: Text('Art Walk',
+                                                      style: Style.theme
+                                                          .textTheme.subtitle2
+                                                          .copyWith(
+                                                        fontSize: 18,
+                                                      )),
+                                                ),
+                                              ]),
                                         ],
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 15.0),
+                                      padding: const EdgeInsets.only(
+                                          top: 50, bottom: 35),
                                       child: Text(
                                           "According to all known laws of aviation, there is no way that a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway. Because bees don’t care what humans think is impossible.",
                                           style:
@@ -274,10 +341,6 @@ class ProfilePage extends StatelessWidget {
                             child: Text('CONTACT ME',
                                 style: Style.theme.textTheme.subtitle2.copyWith(
                                     fontWeight: FontWeight.w500, fontSize: 32)),
-                          ),
-                          Container(
-                            height: 2,
-                            color: Style.theme.primaryColor,
                           ),
                           Wrap(
                             children: [
