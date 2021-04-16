@@ -12,7 +12,7 @@ class Style {
     fontFamily: 'Roboto Condensed',
     textTheme: TextTheme(
       headline1: TextStyle(
-        fontSize: 102,
+        fontSize: 90,
         fontWeight: FontWeight.w700,
         color: Color(0xff6096BA),
         shadows: <Shadow>[
@@ -24,7 +24,7 @@ class Style {
         ],
       ),
       headline2: TextStyle(
-        fontSize: 102,
+        fontSize: 90,
         fontWeight: FontWeight.w700,
         color: Color(0xff124559),
         shadows: <Shadow>[
@@ -46,7 +46,9 @@ class Style {
           fontWeight: FontWeight.w700,
           color: Color(0xff6096BA)),
       subtitle1: TextStyle(
-          fontSize: 12.00, fontWeight: FontWeight.w500, color: Colors.black),
+          fontSize: 28.00,
+          fontWeight: FontWeight.w400,
+          color: Color(0xff6096BA)),
       subtitle2: TextStyle(
           fontSize: 24.00, fontWeight: FontWeight.w300, color: Colors.white),
       bodyText1: TextStyle(

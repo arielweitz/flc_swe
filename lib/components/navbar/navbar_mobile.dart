@@ -1,5 +1,7 @@
+import 'package:flc_swe/models/user.dart';
 import 'package:flc_swe/routing/route_names.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'navbar_components.dart';
 
@@ -34,7 +36,21 @@ class NavigationBarMobile extends StatelessWidget {
           ClickableNavBarItem(
             child: Icon(Icons.people, color: Colors.white, size: 32.0),
             route: ClassesRoute,
-          )
+          ),
+          //icon: Icon(Icons.account_circle),
+          Consumer<UserModel>(
+            builder: (context, user, __) {
+              if (user != null) {
+                return const SizedBox.shrink();
+              } else {
+                return ClickableNavBarItem(
+                  child: Icon(Icons.account_circle,
+                      color: Colors.white, size: 32.0),
+                  route: LoginRoute,
+                );
+              }
+            },
+          ),
         ],
       ),
     );

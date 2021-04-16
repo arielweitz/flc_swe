@@ -37,111 +37,103 @@ class ClassPage extends StatelessWidget {
             child: NavigationBar(scaffoldkey: _scaffoldKey)),
         body: BoundingBox(
           width: sizingInformation.screenSize.width,
-          child: Column(
-            children: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 40.0),
-                  child: Text(
-                    year + " PROFILES",
-                    style: Style.theme.textTheme.headline3,
-                    textAlign: TextAlign.center,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 40.0),
+                    child: Text(
+                      year + " PROFILES",
+                      style: Style.theme.textTheme.headline3,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: SingleChildScrollView(
+                SizedBox(
+                  width: sizingInformation.screenSize.width > 1000
+                      ? ((1000 / 260).floor() * 260 +
+                              ((1000 / 260).floor() - 1) * 30.0) +
+                          80
+                      : sizingInformation.screenSize.width,
                   child: Column(
                     children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 20.0, horizontal: 10),
+                          child: Text(
+                            "BOARDMEMBERS",
+                            style: Style.theme.textTheme.headline4,
+                          ),
+                        ),
+                      ),
                       SizedBox(
                         width: sizingInformation.screenSize.width > 1000
-                            ? ((1000 / 260).floor() * 260 +
-                                    ((1000 / 260).floor() - 1) * 30.0) +
-                                80
-                            : sizingInformation.screenSize.width,
+                            ? (1000 / 260).floor() * 260 +
+                                ((1000 / 260).floor() - 1) * 30.0
+                            : (sizingInformation.screenSize.width / 260)
+                                        .floor() *
+                                    260 +
+                                ((sizingInformation.screenSize.width / 260)
+                                            .floor() -
+                                        1) *
+                                    30.0,
                         child: Column(
                           children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 20.0, horizontal: 10),
-                                child: Text(
-                                  "BOARDMEMBERS",
-                                  style: Style.theme.textTheme.headline4,
-                                ),
-                              ),
+                            Wrap(
+                              spacing: 30,
+                              runSpacing: 30,
+                              children: makeCards("Boardmember"),
+                              // ProfileCard(color: selectRand()),
+                              // ProfileCard(color: selectRand()),
+                              // ProfileCard(color: selectRand()),
+                              // ProfileCard(color: selectRand()),
+                              // ,
                             ),
-                            SizedBox(
-                              width: sizingInformation.screenSize.width > 1000
-                                  ? (1000 / 260).floor() * 260 +
-                                      ((1000 / 260).floor() - 1) * 30.0
-                                  : (sizingInformation.screenSize.width / 260)
-                                              .floor() *
-                                          260 +
-                                      ((sizingInformation.screenSize.width /
-                                                      260)
-                                                  .floor() -
-                                              1) *
-                                          30.0,
-                              child: Column(
-                                children: [
-                                  Wrap(
-                                    spacing: 30,
-                                    runSpacing: 30,
-                                    children: makeCards("boardmember"),
-                                    // ProfileCard(color: selectRand()),
-                                    // ProfileCard(color: selectRand()),
-                                    // ProfileCard(color: selectRand()),
-                                    // ProfileCard(color: selectRand()),
-                                    // ,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(height: 40),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 20.0, horizontal: 10),
-                                child: Text(
-                                  "COUNCILMEMBERS",
-                                  style: Style.theme.textTheme.headline4,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: sizingInformation.screenSize.width > 1000
-                                  ? (1000 / 260).floor() * 260 +
-                                      ((1000 / 260).floor() - 1) * 30.0
-                                  : (sizingInformation.screenSize.width / 260)
-                                              .floor() *
-                                          260 +
-                                      ((sizingInformation.screenSize.width /
-                                                      260)
-                                                  .floor() -
-                                              1) *
-                                          30.0,
-                              child: Column(
-                                children: [
-                                  Wrap(
-                                    spacing: 30,
-                                    runSpacing: 30,
-                                    children: makeCards("councilmember"),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(height: 40),
                           ],
                         ),
-                      )
+                      ),
+                      Container(height: 40),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 20.0, horizontal: 10),
+                          child: Text(
+                            "COUNCILMEMBERS",
+                            style: Style.theme.textTheme.headline4,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: sizingInformation.screenSize.width > 1000
+                            ? (1000 / 260).floor() * 260 +
+                                ((1000 / 260).floor() - 1) * 30.0
+                            : (sizingInformation.screenSize.width / 260)
+                                        .floor() *
+                                    260 +
+                                ((sizingInformation.screenSize.width / 260)
+                                            .floor() -
+                                        1) *
+                                    30.0,
+                        child: Column(
+                          children: [
+                            Wrap(
+                              spacing: 30,
+                              runSpacing: 30,
+                              children: makeCards("Councilmember"),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(height: 40),
                     ],
                   ),
-                ),
-              ),
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),

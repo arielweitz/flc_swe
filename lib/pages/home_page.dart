@@ -9,7 +9,6 @@ class HomePage extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size.height - 120);
     return ResponsiveBuilder(
       builder: (context, sizingInformation) => Scaffold(
         resizeToAvoidBottomInset: false,
@@ -64,9 +63,16 @@ class HomePage extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("FLC", style: Style.theme.textTheme.headline1),
-                          Text("PROFILES",
-                              style: Style.theme.textTheme.headline2),
+                          Text(
+                            "FLC",
+                            style: Style.theme.textTheme.headline1,
+                            textAlign: TextAlign.center,
+                          ),
+                          Text(
+                            "PROFILES",
+                            style: Style.theme.textTheme.headline2,
+                            textAlign: TextAlign.center,
+                          ),
                         ],
                       ),
                     ),

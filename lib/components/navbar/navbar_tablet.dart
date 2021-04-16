@@ -1,5 +1,7 @@
+import 'package:flc_swe/models/user.dart';
 import 'package:flc_swe/routing/route_names.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'navbar_components.dart';
 
@@ -34,10 +36,30 @@ class NavigationBarTablet extends StatelessWidget {
               )
             ],
           ),
-          ClickableNavBarItem(
-            child: Icon(Icons.people, color: Colors.white, size: 32.0),
-            route: ClassesRoute,
-          )
+          Row(
+            children: [
+              ClickableNavBarItem(
+                child: Icon(Icons.people, color: Colors.white, size: 32.0),
+                route: ClassesRoute,
+              ),
+              Consumer<UserModel>(
+                builder: (context, user, __) {
+                  if (user != null) {
+                    return const SizedBox.shrink();
+                  } else {
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 30.0),
+                      child: ClickableNavBarItem(
+                        child: Icon(Icons.account_circle,
+                            color: Colors.white, size: 32.0),
+                        route: LoginRoute,
+                      ),
+                    );
+                  }
+                },
+              ),
+            ],
+          ),
         ],
       ),
     );
