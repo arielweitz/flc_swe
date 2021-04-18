@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flc_swe/models/profile.dart';
-import 'dart:html';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:flutter/material.dart';
-import 'dart:io' as io;
+import 'package:universal_html/html.dart';
 
 class Store {
   static Map<String, Map<String, Profile>> profiles = {};

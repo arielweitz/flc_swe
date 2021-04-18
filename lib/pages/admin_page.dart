@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flc_swe/components/general/bounding_box.dart';
 import 'package:flc_swe/components/general/buttons.dart';
@@ -18,6 +16,7 @@ import 'package:flc_swe/theme/style.dart';
 import 'package:fluro/fluro.dart' as fluro;
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:universal_html/html.dart' as html;
 
 class AdminPage extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -422,7 +421,7 @@ class _EditProfileState extends State<EditProfile> {
   ////looking for internship, work, research, volunteer opportunities, mentorship, involvement opportunities
   ///committees
 
-  File image;
+  html.File image;
   String position;
   String standing;
   Map<String, bool> lookingFor = {
