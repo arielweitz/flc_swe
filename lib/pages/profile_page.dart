@@ -14,7 +14,7 @@ class ProfilePage extends StatelessWidget {
   ProfilePage({Key key, @required this.profile}) : super(key: key);
 
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size.height - 180);
+    print(MediaQuery.of(context).size.width);
     return ResponsiveBuilder(
       builder: (context, sizingInformation) => Scaffold(
         resizeToAvoidBottomInset: false,
@@ -28,317 +28,656 @@ class ProfilePage extends StatelessWidget {
             preferredSize: Size.fromHeight(double.maxFinite),
             child: NavigationBar(scaffoldkey: _scaffoldKey)),
         body: BoundingBox(
-          width: sizingInformation.screenSize.width,
+            child: SingleChildScrollView(
           child: Column(
             children: [
-              Container(height: 80),
-              Expanded(
-                child: SingleChildScrollView(
-                  // main row to have all columns inside
-                  child: Column(
-                    children: [
-                      Wrap(
-                        spacing: 30,
-                        runSpacing: 30,
-                        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              Container(height: 60),
+              Wrap(
+                runSpacing: 30,
+                spacing: 40,
+                children: [
+                  Container(
+                      color: Theme.of(context).primaryColor,
+                      height: 600,
+                      width: MediaQuery.of(context).size.width > 1440
+                          ? 1080 / 3
+                          : MediaQuery.of(context).size.width > 1225 //1150
+                              ? (MediaQuery.of(context).size.width - 350) /
+                                  3 // - 200
+                              : MediaQuery.of(context).size.width > 1100
+                                  ? (MediaQuery.of(context).size.width - 200) /
+                                      3
+                                  : MediaQuery.of(context).size.width > 900
+                                      ? MediaQuery.of(context).size.width - 500
+                                      : MediaQuery.of(context).size.width - 100,
+                      child: Column(
                         children: [
-                          // headshot + name
-                          Container(
-                            height: MediaQuery.of(context).size.height - 180,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 0, horizontal: 20),
-                                    color: Theme.of(context).primaryColor,
-                                    width: 270,
-                                    height: MediaQuery.of(context).size.height -
-                                        350,
-                                    // picture, name, and year column
-                                    child: Column(
-                                        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 35),
-                                            child: Center(
-                                              child: Container(
-                                                height: 200, width: 200,
-                                                decoration: new BoxDecoration(
-                                                    image: new DecorationImage(
-                                                  fit: BoxFit.cover,
-                                                  alignment: FractionalOffset
-                                                      .topCenter,
-                                                  image: AssetImage(
-                                                      profile.imageURL),
-                                                )),
-                                                // child: profile.image, height: 200, width: 200)
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 30),
-                                            child: Text(profile.name,
-                                                style: Style
-                                                    .theme.textTheme.headline5),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 50),
-                                            child: Text(
-                                                profile.years +
-                                                    ' ' +
-                                                    profile.position,
-                                                style: Style
-                                                    .theme.textTheme.headline5),
-                                          ),
-                                        ])),
-                              ],
-                            ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: ((1080 / 3) - 260) / 2),
+                            child: Image.network(profile.imageURL,
+                                height: 260,
+                                //260
+                                width: MediaQuery.of(context).size.width > 1440
+                                    ? 260
+                                    : MediaQuery.of(context).size.width > 1100
+                                        ? (MediaQuery.of(context).size.width -
+                                                200) /
+                                            3
+                                        : 260,
+                                fit: BoxFit.fitWidth),
                           ),
-
-                          // contact info and projects column
                           Container(
-                            height: MediaQuery.of(context).size.height - 180,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                // contact info container
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 20.0),
-                                  child: Container(
-                                      width: 170,
-                                      height: 170,
-                                      // for rounded edges
-                                      decoration: BoxDecoration(
-                                          color: Theme.of(context).accentColor,
-                                          border: Border.all(
-                                            color:
-                                                Theme.of(context).accentColor,
-                                          ),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5))),
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 30, horizontal: 20),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          RichText(
-                                            text: TextSpan(
-                                              children: [
-                                                WidgetSpan(
-                                                  child: Icon(
-                                                    Icons.mail,
-                                                    size: 14,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                                TextSpan(
-                                                    text:
-                                                        "  johnedoe@gmail.com",
-                                                    style: Style.theme.textTheme
-                                                        .bodyText1),
-                                              ],
-                                            ),
-                                          ),
-                                          RichText(
-                                            text: TextSpan(
-                                              children: [
-                                                WidgetSpan(
-                                                  child: Icon(
-                                                    Icons.inbox,
-                                                    size: 14,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                                TextSpan(
-                                                    text:
-                                                        "  linkedin.com/johndoe",
-                                                    style: Style.theme.textTheme
-                                                        .bodyText1),
-                                              ],
-                                            ),
-                                          ),
-                                          RichText(
-                                            text: TextSpan(
-                                              children: [
-                                                WidgetSpan(
-                                                  child: Icon(
-                                                    Icons.call,
-                                                    size: 14,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                                TextSpan(
-                                                    text: "  (###)-###_####",
-                                                    style: Style.theme.textTheme
-                                                        .bodyText1),
-                                              ],
-                                            ),
-                                          )
-                                        ],
-                                      )),
-                                ),
-
-                                // projects title and image column
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 20.0),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 20, vertical: 20),
-                                        color: Theme.of(context).cardColor,
-                                        width: 250,
-                                        child: Text('Projects',
-                                            style: Style
-                                                .theme.textTheme.headline5),
-                                      ),
-                                      Image.asset('assets/images/hp1.jpg',
-                                          height: 250, width: 250),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
+                            height: 20,
                           ),
-
-                          // facts and about me column
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              // quick facts container
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 20.0),
-                                child: Container(
-                                    width: 250,
-                                    height: 300,
-                                    color: Theme.of(context).primaryColor,
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 30, horizontal: 20),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Major: Computer Science",
-                                          style:
-                                              Style.theme.textTheme.bodyText1,
-                                        ),
-                                        Text(
-                                          "School: College of Liberal Arts and Sciences",
-                                          style:
-                                              Style.theme.textTheme.bodyText1,
-                                        ),
-                                        Text(
-                                          "FLC Committees: ",
-                                          style:
-                                              Style.theme.textTheme.bodyText1,
-                                        ),
-                                        Text(
-                                          "Looking for: ",
-                                          style:
-                                              Style.theme.textTheme.bodyText1,
-                                        ),
-                                      ],
-                                    )),
-                              ),
-
-                              // about me container
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 20.0),
-                                child: Container(
-                                    width: 250,
-                                    height: 170,
-                                    color: Style.theme.accentColor,
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 30),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        RichText(
-                                          text: TextSpan(
-                                            children: [
-                                              WidgetSpan(
-                                                child: Icon(
-                                                  Icons.person,
-                                                  size: 30,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                              TextSpan(
-                                                  text: "  About Me",
-                                                  style: Style.theme.textTheme
-                                                      .headline5),
-                                            ],
-                                          ),
-                                        ),
-                                        Text(
-                                          'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut ero labore et dolore magna aliqua. Ut enim ad minim veniam.',
-                                          style:
-                                              Style.theme.textTheme.bodyText1,
-                                        )
-                                      ],
-                                    )),
-                              ),
-                            ],
-                          ),
-
-                          Container(
-                            height: MediaQuery.of(context).size.height - 180,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 10),
-                                  color: Theme.of(context).cardColor,
-                                  width: 290,
-                                  height: 600,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Image.asset('assets/images/hp1.jpg',
-                                          height: 250, width: 250),
-                                      Container(height: 20),
-                                      Image.asset('assets/images/hp1.jpg',
-                                          height: 250, width: 250),
-                                      Container(height: 10),
-                                    ],
-                                  ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15.0),
+                                      child: Text('NAME',
+                                          style: Style.theme.textTheme.subtitle2
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w500)),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15.0),
+                                      child: Text('YEAR',
+                                          style: Style.theme.textTheme.subtitle2
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w500)),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15.0),
+                                      child: Text('POSITION',
+                                          style: Style.theme.textTheme.subtitle2
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w500)),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15.0),
+                                      child: Text('MAJOR',
+                                          style: Style.theme.textTheme.subtitle2
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w500)),
+                                    ),
+                                  ],
                                 ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15.0),
+                                      child: Text(profile.name,
+                                          style:
+                                              Style.theme.textTheme.subtitle2),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15.0),
+                                      child: Text(profile.years,
+                                          style:
+                                              Style.theme.textTheme.subtitle2),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15.0),
+                                      child: Text(profile.position,
+                                          style:
+                                              Style.theme.textTheme.subtitle2),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 15.0),
+                                      child: Text(profile.major,
+                                          style:
+                                              Style.theme.textTheme.subtitle2),
+                                    ),
+                                  ],
+                                )
                               ],
                             ),
                           )
                         ],
-                      ),
-                    ],
+                      )),
+                  Container(
+                    color: Theme.of(context).accentColor,
+                    //600
+                    height:
+                        MediaQuery.of(context).size.width < 1150 ? 700 : 600,
+                    width: MediaQuery.of(context).size.width > 1440
+                        ? 1080 * 2 / 3
+                        : MediaQuery.of(context).size.width > 1100 //1150
+                            ? (MediaQuery.of(context).size.width - 200) * 2 / 3
+                            : MediaQuery.of(context).size.width - 100,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Text('ABOUT ME',
+                                style: Style.theme.textTheme.subtitle2.copyWith(
+                                    fontWeight: FontWeight.w500, fontSize: 32)),
+                          ),
+                          Container(
+                            height: 2,
+                            color: Style.theme.primaryColor,
+                          ),
+                          Center(
+                            child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Wrap(
+                                  alignment: WrapAlignment.center,
+                                  crossAxisAlignment: WrapCrossAlignment.center,
+                                  spacing: 30,
+                                  children: [
+                                    ConstrainedBox(
+                                      constraints: BoxConstraints(
+                                        maxWidth:
+                                            MediaQuery.of(context).size.width >
+                                                    1440
+                                                ? 1080 * 2 / 7.5
+                                                : MediaQuery.of(context)
+                                                            .size
+                                                            .width >
+                                                        1150
+                                                    ? (MediaQuery.of(context)
+                                                                .size
+                                                                .width -
+                                                            200) *
+                                                        2 /
+                                                        7.5
+                                                    : (MediaQuery.of(context)
+                                                            .size
+                                                            .width -
+                                                        200),
+                                      ),
+                                      // looking for row
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 15.0),
+                                            child: Text('LOOKING FOR',
+                                                style: Style
+                                                    .theme.textTheme.subtitle2
+                                                    .copyWith(
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.w500)),
+                                          ),
+                                          Wrap(
+                                              direction: Axis.vertical,
+                                              spacing: 5.0,
+                                              children:
+                                                  makeList(profile.lookingFor)),
+                                        ],
+                                      ),
+                                    ),
+                                    ConstrainedBox(
+                                      constraints: BoxConstraints(
+                                        maxWidth:
+                                            MediaQuery.of(context).size.width >
+                                                    1440
+                                                ? 1080 * 2 / 7.5
+                                                : MediaQuery.of(context)
+                                                            .size
+                                                            .width >
+                                                        1150
+                                                    ? (MediaQuery.of(context)
+                                                                .size
+                                                                .width -
+                                                            200) *
+                                                        2 /
+                                                        7.5
+                                                    : (MediaQuery.of(context)
+                                                            .size
+                                                            .width -
+                                                        200),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 15.0),
+                                            child: Text('FLC COMMITTEES',
+                                                style: Style
+                                                    .theme.textTheme.subtitle2
+                                                    .copyWith(
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.w500)),
+                                          ),
+                                          Wrap(
+                                              direction: Axis.vertical,
+                                              spacing: 5.0,
+                                              children: makeList(profile
+                                                  .committees
+                                                  .split(', '))),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 50, bottom: 35),
+                                      child: Text(profile.bio,
+                                          style:
+                                              Style.theme.textTheme.subtitle2),
+                                    ),
+                                  ],
+                                )),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Text('CONTACT ME',
+                                style: Style.theme.textTheme.subtitle2.copyWith(
+                                    fontWeight: FontWeight.w500, fontSize: 32)),
+                          ),
+                          Wrap(
+                            children: [
+                              Container(
+                                color: Theme.of(context).primaryColor,
+                                height: 60,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(Icons.mail,
+                                            color: Colors.white, size: 14),
+                                        Text(
+                                          profile.email,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w300,
+                                              //fontStyle: FontStyle.italic,
+                                              fontFamily: 'Roboto Condensed',
+                                              fontSize: 14),
+                                        )
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon(Icons.inbox,
+                                            color: Colors.white, size: 14),
+                                        Text(profile.linkedin,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w300,
+                                                //fontStyle: FontStyle.italic,
+                                                fontFamily: 'Roboto Condensed',
+                                                fontSize: 14)),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon(Icons.call,
+                                            color: Colors.white, size: 14),
+                                        Text(profile.phone,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w300,
+                                                //fontStyle: FontStyle.italic,
+                                                fontFamily: 'Roboto Condensed',
+                                                fontSize: 14)),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          )
+                        ]),
                   ),
-                ),
-              ),
+                ],
+              )
             ],
           ),
-        ),
+        )),
       ),
     );
   }
+
+  List<Widget> makeList(List<String> objs) {
+    List<Widget> list = [];
+    for (int i = 0; i < objs.length; i++) {
+      list.add(
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 2.0),
+          child: Text(objs[i],
+              style: Style.theme.textTheme.subtitle2.copyWith(
+                fontSize: 18,
+              )),
+        ),
+      );
+    }
+    return list;
+  }
 }
+
+// body: BoundingBox(
+//           width: sizingInformation.screenSize.width,
+//           child: Column(
+//             children: [
+//               Container(height: 80),
+//               Expanded(
+//                 child: SingleChildScrollView(
+//                   // main row to have all columns inside
+//                   child: Column(
+//                     children: [
+//                       Wrap(
+//                         spacing: 30,
+//                         runSpacing: 30,
+//                         // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                         children: [
+//                           // headshot + name
+//                           Container(
+//                             height: MediaQuery.of(context).size.height - 180,
+//                             child: Column(
+//                               mainAxisAlignment: MainAxisAlignment.start,
+//                               crossAxisAlignment: CrossAxisAlignment.center,
+//                               children: [
+//                                 Container(
+//                                     padding: EdgeInsets.symmetric(
+//                                         vertical: 0, horizontal: 20),
+//                                     color: Theme.of(context).primaryColor,
+//                                     width: 270,
+//                                     height: MediaQuery.of(context).size.height -
+//                                         350,
+//                                     // picture, name, and year column
+//                                     child: Column(
+//                                         //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                                         crossAxisAlignment:
+//                                             CrossAxisAlignment.start,
+//                                         children: <Widget>[
+//                                           Padding(
+//                                             padding:
+//                                                 const EdgeInsets.only(top: 35),
+//                                             child: Center(
+//                                               child: Container(
+//                                                 height: 200, width: 200,
+//                                                 decoration: new BoxDecoration(
+//                                                     image: new DecorationImage(
+//                                                   fit: BoxFit.cover,
+//                                                   alignment: FractionalOffset
+//                                                       .topCenter,
+//                                                   image: AssetImage(
+//                                                       profile.imageURL),
+//                                                 )),
+//                                                 // child: profile.image, height: 200, width: 200)
+//                                               ),
+//                                             ),
+//                                           ),
+//                                           Padding(
+//                                             padding:
+//                                                 const EdgeInsets.only(top: 30),
+//                                             child: Text(profile.name,
+//                                                 style: Style
+//                                                     .theme.textTheme.headline5),
+//                                           ),
+//                                           Padding(
+//                                             padding:
+//                                                 const EdgeInsets.only(top: 50),
+//                                             child: Text(
+//                                                 profile.years +
+//                                                     ' ' +
+//                                                     profile.position,
+//                                                 style: Style
+//                                                     .theme.textTheme.headline5),
+//                                           ),
+//                                         ])),
+//                               ],
+//                             ),
+//                           ),
+
+//                           // contact info and projects column
+//                           Container(
+//                             height: MediaQuery.of(context).size.height - 180,
+//                             child: Column(
+//                               mainAxisAlignment: MainAxisAlignment.start,
+//                               crossAxisAlignment: CrossAxisAlignment.center,
+//                               children: [
+//                                 // contact info container
+//                                 Padding(
+//                                   padding: const EdgeInsets.symmetric(
+//                                       vertical: 20.0),
+//                                   child: Container(
+//                                       width: 170,
+//                                       height: 170,
+//                                       // for rounded edges
+//                                       decoration: BoxDecoration(
+//                                           color: Theme.of(context).accentColor,
+//                                           border: Border.all(
+//                                             color:
+//                                                 Theme.of(context).accentColor,
+//                                           ),
+//                                           borderRadius: BorderRadius.all(
+//                                               Radius.circular(5))),
+//                                       padding: EdgeInsets.symmetric(
+//                                           vertical: 30, horizontal: 20),
+//                                       child: Column(
+//                                         mainAxisAlignment:
+//                                             MainAxisAlignment.spaceEvenly,
+//                                         crossAxisAlignment:
+//                                             CrossAxisAlignment.start,
+//                                         children: <Widget>[
+//                                           RichText(
+//                                             text: TextSpan(
+//                                               children: [
+//                                                 WidgetSpan(
+//                                                   child: Icon(
+//                                                     Icons.mail,
+//                                                     size: 14,
+//                                                     color: Colors.white,
+//                                                   ),
+//                                                 ),
+//                                                 TextSpan(
+//                                                     text:
+//                                                         "  johnedoe@gmail.com",
+//                                                     style: Style.theme.textTheme
+//                                                         .bodyText1),
+//                                               ],
+//                                             ),
+//                                           ),
+//                                           RichText(
+//                                             text: TextSpan(
+//                                               children: [
+//                                                 WidgetSpan(
+//                                                   child: Icon(
+//                                                     Icons.inbox,
+//                                                     size: 14,
+//                                                     color: Colors.white,
+//                                                   ),
+//                                                 ),
+//                                                 TextSpan(
+//                                                     text:
+//                                                         "  linkedin.com/johndoe",
+//                                                     style: Style.theme.textTheme
+//                                                         .bodyText1),
+//                                               ],
+//                                             ),
+//                                           ),
+//                                           RichText(
+//                                             text: TextSpan(
+//                                               children: [
+//                                                 WidgetSpan(
+//                                                   child: Icon(
+//                                                     Icons.call,
+//                                                     size: 14,
+//                                                     color: Colors.white,
+//                                                   ),
+//                                                 ),
+//                                                 TextSpan(
+//                                                     text: "  (###)-###_####",
+//                                                     style: Style.theme.textTheme
+//                                                         .bodyText1),
+//                                               ],
+//                                             ),
+//                                           )
+//                                         ],
+//                                       )),
+//                                 ),
+
+//                                 // projects title and image column
+//                                 Padding(
+//                                   padding: const EdgeInsets.symmetric(
+//                                       vertical: 20.0),
+//                                   child: Column(
+//                                     children: <Widget>[
+//                                       Container(
+//                                         padding: EdgeInsets.symmetric(
+//                                             horizontal: 20, vertical: 20),
+//                                         color: Theme.of(context).cardColor,
+//                                         width: 250,
+//                                         child: Text('Projects',
+//                                             style: Style
+//                                                 .theme.textTheme.headline5),
+//                                       ),
+//                                       Image.asset('assets/images/hp1.jpg',
+//                                           height: 250, width: 250),
+//                                     ],
+//                                   ),
+//                                 ),
+//                               ],
+//                             ),
+//                           ),
+
+//                           // facts and about me column
+//                           Column(
+//                             mainAxisAlignment: MainAxisAlignment.start,
+//                             crossAxisAlignment: CrossAxisAlignment.center,
+//                             children: [
+//                               // quick facts container
+//                               Padding(
+//                                 padding:
+//                                     const EdgeInsets.symmetric(vertical: 20.0),
+//                                 child: Container(
+//                                     width: 250,
+//                                     height: 300,
+//                                     color: Theme.of(context).primaryColor,
+//                                     padding: EdgeInsets.symmetric(
+//                                         vertical: 30, horizontal: 20),
+//                                     child: Column(
+//                                       mainAxisAlignment:
+//                                           MainAxisAlignment.spaceEvenly,
+//                                       crossAxisAlignment:
+//                                           CrossAxisAlignment.start,
+//                                       children: [
+//                                         Text(
+//                                           "Major: Computer Science",
+//                                           style:
+//                                               Style.theme.textTheme.bodyText1,
+//                                         ),
+//                                         Text(
+//                                           "School: College of Liberal Arts and Sciences",
+//                                           style:
+//                                               Style.theme.textTheme.bodyText1,
+//                                         ),
+//                                         Text(
+//                                           "FLC Committees: ",
+//                                           style:
+//                                               Style.theme.textTheme.bodyText1,
+//                                         ),
+//                                         Text(
+//                                           "Looking for: ",
+//                                           style:
+//                                               Style.theme.textTheme.bodyText1,
+//                                         ),
+//                                       ],
+//                                     )),
+//                               ),
+
+//                               // about me container
+//                               Padding(
+//                                 padding:
+//                                     const EdgeInsets.symmetric(vertical: 20.0),
+//                                 child: Container(
+//                                     width: 250,
+//                                     height: 170,
+//                                     color: Style.theme.accentColor,
+//                                     padding: EdgeInsets.symmetric(
+//                                         vertical: 10, horizontal: 30),
+//                                     child: Column(
+//                                       mainAxisAlignment:
+//                                           MainAxisAlignment.spaceEvenly,
+//                                       crossAxisAlignment:
+//                                           CrossAxisAlignment.start,
+//                                       children: [
+//                                         RichText(
+//                                           text: TextSpan(
+//                                             children: [
+//                                               WidgetSpan(
+//                                                 child: Icon(
+//                                                   Icons.person,
+//                                                   size: 30,
+//                                                   color: Colors.white,
+//                                                 ),
+//                                               ),
+//                                               TextSpan(
+//                                                   text: "  About Me",
+//                                                   style: Style.theme.textTheme
+//                                                       .headline5),
+//                                             ],
+//                                           ),
+//                                         ),
+//                                         Text(
+//                                           'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut ero labore et dolore magna aliqua. Ut enim ad minim veniam.',
+//                                           style:
+//                                               Style.theme.textTheme.bodyText1,
+//                                         )
+//                                       ],
+//                                     )),
+//                               ),
+//                             ],
+//                           ),
+
+//                           Container(
+//                             height: MediaQuery.of(context).size.height - 180,
+//                             child: Column(
+//                               mainAxisAlignment: MainAxisAlignment.start,
+//                               children: [
+//                                 Container(
+//                                   padding: EdgeInsets.symmetric(
+//                                       vertical: 10, horizontal: 10),
+//                                   color: Theme.of(context).cardColor,
+//                                   width: 290,
+//                                   height: 600,
+//                                   child: Column(
+//                                     mainAxisAlignment: MainAxisAlignment.end,
+//                                     children: [
+//                                       Image.asset('assets/images/hp1.jpg',
+//                                           height: 250, width: 250),
+//                                       Container(height: 20),
+//                                       Image.asset('assets/images/hp1.jpg',
+//                                           height: 250, width: 250),
+//                                       Container(height: 10),
+//                                     ],
+//                                   ),
+//                                 ),
+//                               ],
+//                             ),
+//                           )
+//                         ],
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
