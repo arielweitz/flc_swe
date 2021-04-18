@@ -526,17 +526,20 @@ class _EditProfileState extends State<EditProfile> {
                               lookingFor[name] = chosen;
                             }),
                           ),
-                          PrimaryButton(
-                              title: "Select Image",
-                              onPressed: () async {
-                                Store obj = Store();
-                                await obj.uploadImage(
-                                    onSelected: (newFile) => setState(() {
-                                          image = newFile;
-                                        }));
-                              }),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 18.0),
+                            child: PrimaryButton(
+                                title: "Select Image",
+                                onPressed: () async {
+                                  Store obj = Store();
+                                  await obj.uploadImage(
+                                      onSelected: (newFile) => setState(() {
+                                            image = newFile;
+                                          }));
+                                }),
+                          ),
                           InputField(
-                              text: 'Committees',
+                              text: 'Committees (as a ", " separated list)',
                               controller: widget._controllers['committees'],
                               type: InputType.Text),
                           InputField(
@@ -578,15 +581,21 @@ class _EditProfileState extends State<EditProfile> {
                                         .validate()) {
                                       try {
                                         Store obj = Store();
-                                        Uri url = await obj.addImageToStore(
-                                            widget.years,
-                                            widget._controllers['email'].text
-                                                .substring(
-                                                    0,
-                                                    widget._controllers['email']
-                                                        .text
-                                                        .indexOf('@')),
-                                            image);
+
+                                        Uri url = image == null
+                                            ? null
+                                            : await obj.addImageToStore(
+                                                widget.years,
+                                                widget
+                                                    ._controllers['email'].text
+                                                    .substring(
+                                                        0,
+                                                        widget
+                                                            ._controllers[
+                                                                'email']
+                                                            .text
+                                                            .indexOf('@')),
+                                                image);
                                         Profile temp = Profile(
                                           name:
                                               widget._controllers['name'].text,
@@ -608,7 +617,9 @@ class _EditProfileState extends State<EditProfile> {
                                                       .indexOf('@')),
                                           years: widget.years,
                                           standing: standing,
-                                          imageURL: url.toString(),
+                                          imageURL: image == null
+                                              ? widget.profile.imageURL
+                                              : url.toString(),
                                           committees: widget
                                               ._controllers['committees'].text,
                                           lookingFor:

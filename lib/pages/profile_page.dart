@@ -55,7 +55,7 @@ class ProfilePage extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(
                                 top: ((1080 / 3) - 260) / 2),
-                            child: Image.asset('assets/images/SofiaImage.jpeg',
+                            child: Image.network(profile.imageURL,
                                 height: 260,
                                 //260
                                 width: MediaQuery.of(context).size.width > 1440
@@ -71,10 +71,9 @@ class ProfilePage extends StatelessWidget {
                             height: 20,
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: ((1080 / 3) - 260) / 2),
+                            padding: const EdgeInsets.symmetric(horizontal: 0),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,28 +118,28 @@ class ProfilePage extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 15.0),
-                                      child: Text('NAME',
+                                      child: Text(profile.name,
                                           style:
                                               Style.theme.textTheme.subtitle2),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 15.0),
-                                      child: Text('YEAR',
+                                      child: Text(profile.years,
                                           style:
                                               Style.theme.textTheme.subtitle2),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 15.0),
-                                      child: Text('POSITION',
+                                      child: Text(profile.position,
                                           style:
                                               Style.theme.textTheme.subtitle2),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 15.0),
-                                      child: Text('MAJOR',
+                                      child: Text(profile.major,
                                           style:
                                               Style.theme.textTheme.subtitle2),
                                     ),
@@ -220,44 +219,10 @@ class ProfilePage extends StatelessWidget {
                                                             FontWeight.w500)),
                                           ),
                                           Wrap(
-                                            direction: Axis.vertical,
-                                            spacing: 5.0,
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 2.0),
-                                                child: Text('Internship',
-                                                    style: Style.theme.textTheme
-                                                        .subtitle2
-                                                        .copyWith(
-                                                      fontSize: 18,
-                                                    )),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 2.0),
-                                                child: Text('Volunteering',
-                                                    style: Style.theme.textTheme
-                                                        .subtitle2
-                                                        .copyWith(
-                                                      fontSize: 18,
-                                                    )),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 2.0),
-                                                child: Text('Mentorship',
-                                                    style: Style.theme.textTheme
-                                                        .subtitle2
-                                                        .copyWith(
-                                                      fontSize: 18,
-                                                    )),
-                                              ),
-                                            ],
-                                          ),
+                                              direction: Axis.vertical,
+                                              spacing: 5.0,
+                                              children:
+                                                  makeList(profile.lookingFor)),
                                         ],
                                       ),
                                     ),
@@ -300,36 +265,16 @@ class ProfilePage extends StatelessWidget {
                                           Wrap(
                                               direction: Axis.vertical,
                                               spacing: 5.0,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(vertical: 2.0),
-                                                  child: Text('REPGainesville',
-                                                      style: Style.theme
-                                                          .textTheme.subtitle2
-                                                          .copyWith(
-                                                        fontSize: 18,
-                                                      )),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(vertical: 2.0),
-                                                  child: Text('Art Walk',
-                                                      style: Style.theme
-                                                          .textTheme.subtitle2
-                                                          .copyWith(
-                                                        fontSize: 18,
-                                                      )),
-                                                ),
-                                              ]),
+                                              children: makeList(profile
+                                                  .committees
+                                                  .split(', '))),
                                         ],
                                       ),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(
                                           top: 50, bottom: 35),
-                                      child: Text(
-                                          "According to all known laws of aviation, there is no way that a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway. Because bees don’t care what humans think is impossible.",
+                                      child: Text(profile.bio,
                                           style:
                                               Style.theme.textTheme.subtitle2),
                                     ),
@@ -356,7 +301,7 @@ class ProfilePage extends StatelessWidget {
                                         Icon(Icons.mail,
                                             color: Colors.white, size: 14),
                                         Text(
-                                          'test@test.com',
+                                          profile.email,
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.w300,
@@ -370,7 +315,7 @@ class ProfilePage extends StatelessWidget {
                                       children: [
                                         Icon(Icons.inbox,
                                             color: Colors.white, size: 14),
-                                        Text('linkedin/test',
+                                        Text(profile.linkedin,
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.w300,
@@ -383,7 +328,7 @@ class ProfilePage extends StatelessWidget {
                                       children: [
                                         Icon(Icons.call,
                                             color: Colors.white, size: 14),
-                                        Text('813-###-####',
+                                        Text(profile.phone,
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.w300,
@@ -406,6 +351,22 @@ class ProfilePage extends StatelessWidget {
         )),
       ),
     );
+  }
+
+  List<Widget> makeList(List<String> objs) {
+    List<Widget> list = [];
+    for (int i = 0; i < objs.length; i++) {
+      list.add(
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 2.0),
+          child: Text(objs[i],
+              style: Style.theme.textTheme.subtitle2.copyWith(
+                fontSize: 18,
+              )),
+        ),
+      );
+    }
+    return list;
   }
 }
 
