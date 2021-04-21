@@ -23,18 +23,6 @@ void main() {
 }
 
 class FLC extends StatelessWidget {
-  // This widget is the root of your application.
-  // Widget build(BuildContext context) {
-  // return MaterialApp(
-  //   title: 'FLC',
-  //   debugShowCheckedModeBanner: false,
-  //   theme: Style.theme,
-  //   //initialRoute: HomeRoute,
-  //   home: HomePage(),
-  //   onGenerateRoute: FluroRouter.router.generator,
-  // );
-  // }
-
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
   @override
@@ -55,7 +43,6 @@ class FLC extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: Style.theme,
             initialRoute: HomeRoute,
-            //home: HomePage(),
             onGenerateRoute: FluroRouter.router.generator,
           );
         }

@@ -147,8 +147,6 @@ class FluroRouter {
         }
       },
     );
-
-    //Future<bool> _resp = obj.setProfiles();
   });
 
   static fluro.Handler _loginHandler = fluro.Handler(

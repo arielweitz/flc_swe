@@ -1,7 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flc_swe/data/data.dart';
 import 'package:flc_swe/pages/admin_page.dart';
-import 'package:flc_swe/pages/class_page.dart';
 import 'package:flc_swe/routing/route_names.dart';
 import 'package:flc_swe/routing/router.dart';
 import 'package:flc_swe/theme/style.dart';

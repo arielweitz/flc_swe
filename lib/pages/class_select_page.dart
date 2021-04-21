@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:flc_swe/components/general/bounding_box.dart';
 import 'package:flc_swe/components/general/buttons.dart';
-import 'package:flc_swe/components/general/profile_card.dart';
 import 'package:flc_swe/components/navbar/navbar.dart';
 import 'package:flc_swe/components/navbar/navbar_components.dart';
 import 'package:flc_swe/data/data.dart';
@@ -92,7 +89,6 @@ class ClassSelectPage extends StatelessWidget {
       buttons.add(ClassButton(
         year: years[i],
       ));
-      //print(years[i] + ' ' + i.toString());
     }
     return buttons;
   }
