@@ -1,6 +1,5 @@
 import 'package:flc_swe/models/user.dart';
 import 'package:flc_swe/routing/route_names.dart';
-import 'package:flc_swe/theme/style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'navbar_components.dart';
@@ -71,40 +70,6 @@ class NavigationBarDesktop extends StatelessWidget {
                   }
                 },
               ),
-
-              // IconButton(
-              //   icon: Icon(Icons.account_circle),
-              //   iconSize: 42.0,
-              //   color: Colors.white,
-              //   onPressed: () {
-              //     FluroRouter.router.navigateTo(
-              //         context,
-              //         LoginRoute,
-              //         transition: fluro.TransitionType.fadeIn,
-              //         transitionDuration: Duration(milliseconds: 150));
-              //   },
-              // )
-              // ModalRoute.of(context).settings.name != HomeRoute &&
-              //     ModalRoute.of(context).settings.name != ProfilesRoute &&
-              //     ModalRoute.of(context).settings.name != ClassesRoute &&
-              //     ModalRoute.of(context).settings.name != MyPhonesRoute &&
-              //     ModalRoute.of(context).settings.name != SettingsRoute &&
-              //     ModalRoute.of(context).settings.name != AddAPhoneRoute &&
-              //     ModalRoute.of(context).settings.name != SendAMessageRoute ?
-              //   SizedBox(
-              //     width: 60,
-              //   ) : const SizedBox.shrink(),
-              // ModalRoute.of(context).settings.name != AccountRoute &&
-              // ModalRoute.of(context).settings.name != OrdersRoute &&
-              // ModalRoute.of(context).settings.name != MessagesRoute &&
-              // ModalRoute.of(context).settings.name != MyPhonesRoute &&
-              // ModalRoute.of(context).settings.name != SettingsRoute &&
-              // ModalRoute.of(context).settings.name != AddAPhoneRoute &&
-              // ModalRoute.of(context).settings.name != SendAMessageRoute ?
-              //   ClickableNavBarItem(
-              //     child: NavBarItem(title: 'Account'),
-              //     route: AccountRoute,
-              //   ) : const SizedBox.shrink(),
             ],
           )
         ],

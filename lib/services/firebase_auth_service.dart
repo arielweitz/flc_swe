@@ -36,13 +36,9 @@ class FirebaseAuthService {
       String email, String password) async {
     final authResult = await _firebaseAuth.signInWithEmailAndPassword(
         email: email, password: password);
-    // final userDoc = await _users.doc(authResult.user.uid).get();
-    // final data = userDoc.data();
     return UserModel(
       uid: authResult.user.uid,
       email: email,
-      // firstName: data['first'],
-      // lastName: data['last'],
     );
   }
 

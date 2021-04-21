@@ -301,11 +301,6 @@ class ClassAdminPage extends StatelessWidget {
                               spacing: 30,
                               runSpacing: 30,
                               children: makeCards("Boardmember"),
-                              // ProfileCard(color: selectRand()),
-                              // ProfileCard(color: selectRand()),
-                              // ProfileCard(color: selectRand()),
-                              // ProfileCard(color: selectRand()),
-                              // ,
                             ),
                           ],
                         ),
@@ -417,10 +412,6 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
-  //name, id, major, position, year, bio, list of LOOKING FOR, list of committees, phone, email, lnkedin
-  ////looking for internship, work, research, volunteer opportunities, mentorship, involvement opportunities
-  ///committees
-
   html.File image;
   String position;
   String standing;
@@ -646,7 +637,6 @@ class _EditProfileState extends State<EditProfile> {
                                                       if (snapshot.hasData) {
                                                         obj.setProfiles(
                                                             snapshot.data);
-                                                        //print(obj.getProfiles());
                                                         return ClassAdminPage(
                                                           year: widget.years,
                                                           profiles:
@@ -658,13 +648,7 @@ class _EditProfileState extends State<EditProfile> {
                                                       // Otherwise, show something whilst waiting for initialization to complete
                                                       return CircularProgressIndicator();
                                                     },
-                                                  )
-                                              // ClassAdminPage(
-                                              //   year: widget.years,
-                                              //   profiles: obj.getProfiles()[
-                                              //       widget.years],
-                                              // )
-                                              ),
+                                                  )),
                                         );
                                       } catch (e) {
                                         print(e.toString());
@@ -690,19 +674,6 @@ class _EditProfileState extends State<EditProfile> {
                                                                   .white)),
                                                 )));
                                       }
-
-                                      // FirebaseAuth.instance
-                                      //     .authStateChanges()
-                                      //     .listen((User user) {
-                                      //   if (user != null) {
-                                      //     FluroRouter.router.navigateTo(
-                                      //         context, HomeRoute,
-                                      //         transition:
-                                      //             fluro.TransitionType.fadeIn,
-                                      //         transitionDuration:
-                                      //             Duration(milliseconds: 150));
-                                      //   }
-                                      // });
                                     }
                                   }),
                             ],
@@ -725,7 +696,6 @@ class _EditProfileState extends State<EditProfile> {
     choices.forEach((k, v) {
       if (v) chosen.add(k.toString());
     });
-    //print(chosen);
     return chosen;
   }
 }

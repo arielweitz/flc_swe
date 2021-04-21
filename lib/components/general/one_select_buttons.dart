@@ -58,7 +58,7 @@ class SelectButton extends StatelessWidget {
                   ),
                   width: 20.0,
                   height: 20.0,
-                  padding: const EdgeInsets.all(2.0), // bordee width
+                  padding: const EdgeInsets.all(2.0), // border width
                   decoration: new BoxDecoration(
                     color: Style.theme.primaryColor, // border color
                     shape: BoxShape.circle,
@@ -75,18 +75,3 @@ class SelectButton extends StatelessWidget {
     );
   }
 }
-
-//
-//Container(
-// child: new CircleAvatar(
-//   child: const Text('C'),
-//   foregroundColor: Colors.white,
-//   backgroundColor: const Colors.blue
-// ),
-// width: 32.0,
-// height: 32.0,
-// padding: const EdgeInsets.all(2.0), // borde width
-// decoration: new BoxDecoration(
-//   color: const Color(0xFFFFFFFF), // border color
-//   shape: BoxShape.circle,
-// )

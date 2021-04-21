@@ -37,7 +37,6 @@ class NavigationBarMobile extends StatelessWidget {
             child: Icon(Icons.people, color: Colors.white, size: 32.0),
             route: ClassesRoute,
           ),
-          //icon: Icon(Icons.account_circle),
           Consumer<UserModel>(
             builder: (context, user, __) {
               if (user != null) {

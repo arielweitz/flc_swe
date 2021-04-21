@@ -110,14 +110,6 @@ class ProfileAdminCard extends StatelessWidget {
                             profile: profile,
                           )),
                 )
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //       builder: (context) => ClassAdminPage(
-              //             year: text,
-              //             profiles: obj.getProfiles()[text],
-              //           )),
-              // );
               : () {};
         },
         child: Container(
@@ -273,13 +265,7 @@ class ProfileAdminCard extends StatelessWidget {
                                             // Otherwise, show something whilst waiting for initialization to complete
                                             return CircularProgressIndicator();
                                           },
-                                        )
-                                    // ClassAdminPage(
-                                    //   year: widget.years,
-                                    //   profiles: obj.getProfiles()[
-                                    //       widget.years],
-                                    // )
-                                    ),
+                                        )),
                               );
                             },
                           ),

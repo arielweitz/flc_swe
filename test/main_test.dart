@@ -1,42 +1,14 @@
 // Imports the Flutter Driver API.
+import 'package:flc_swe/models/profile.dart';
 import 'package:test/test.dart';
 import 'package:flc_swe/practice_math.dart';
 
 void main() {
   group('Practice Math', () {
-    // First, define the Finders and use them to locate widgets from the
-    // test suite. Note: the Strings provided to the `byValueKey` method must
-    // be the same as the Strings we used for the Keys in step 1.
-    // final counterTextFinder = find.byValueKey('counter');
-    // final buttonFinder = find.byValueKey('increment');
+    //flutter version was having some issues with widget tests so those have been ommited
 
-    // FlutterDriver driver;
+    //trivial tests
     PracticeMath obj = PracticeMath();
-
-    // // Connect to the Flutter driver before running any tests.
-    // setUpAll(() async {
-    //   driver = await FlutterDriver.connect();
-    // });
-
-    // // Close the connection to the driver after the tests have completed.
-    // tearDownAll(() async {
-    //   if (driver != null) {
-    //     driver.close();
-    //   }
-    // });
-
-    // test('starts at 0', () async {
-    //   // Use the `driver.getText` method to verify the counter starts at 0.
-    //   expect(await driver.getText(counterTextFinder), "0");
-    // });
-
-    // test('increments the counter', () async {
-    //   // First, tap the button.
-    //   await driver.tap(buttonFinder);
-
-    //   // Then, verify the counter text is incremented by 1.
-    //   expect(await driver.getText(counterTextFinder), "1");
-    // });
 
     test('sum', () {
       int res = obj.sum(2, 2);
@@ -55,5 +27,121 @@ void main() {
 
       expect(res, 8);
     });
+
+    test('sum', () {
+      int res = obj.sum(2, 2);
+
+      expect(res, 4);
+    });
   });
+
+  group('Objects', () {
+    //some tests related to object creation and making sure everything works
+
+    Profile temp = Profile(
+        bio: "hello",
+        name: "bob",
+        uid: "bob123",
+        email: "bob123@ufl.edu",
+        linkedin: "bob/linkedin",
+        phone: "1234567890",
+        major: "cs",
+        years: "2020-2021",
+        imageURL: "123.com",
+        position: "Councilmember",
+        standing: "Freshman",
+        committees: "1, 2, 3",
+        lookingFor: ["Internship"]);
+
+    test('bio', () {
+      String res = temp.bio;
+
+      expect(res, "hello");
+    });
+
+    test('name', () {
+      String res = temp.name;
+
+      expect(res, "bob");
+    });
+
+    test('uid', () {
+      String res = temp.uid;
+
+      expect(res, "bob123");
+    });
+
+    test('email', () {
+      String res = temp.email;
+
+      expect(res, "bob123@ufl.edu");
+    });
+
+    test('linkedin', () {
+      String res = temp.linkedin;
+
+      expect(res, "bob/linkedin");
+    });
+
+    test('phone', () {
+      String res = temp.phone;
+
+      expect(res, "1234567890");
+    });
+
+    test('major', () {
+      String res = temp.major;
+
+      expect(res, "cs");
+    });
+
+    test('years', () {
+      String res = temp.years;
+
+      expect(res, "2020-2021");
+    });
+
+    test('imageURL', () {
+      String res = temp.imageURL;
+
+      expect(res, "123.com");
+    });
+
+    test('position', () {
+      String res = temp.position;
+
+      expect(res, "Councilmember");
+    });
+
+    test('standing', () {
+      String res = temp.standing;
+
+      expect(res, "Freshman");
+    });
+
+    test('committees', () {
+      String res = temp.committees;
+
+      expect(res, "1, 2, 3");
+    });
+
+    test('lookingFor', () {
+      dynamic res = temp.lookingFor;
+
+      List<String> obj = [];
+
+      expect(res.runtimeType, obj.runtimeType);
+    });
+  });
+
+  // group('Firebase', () {
+  //   //some tests related to firebase, they are commented out though as they have hard coded information
+
+  //   test('bio', () {
+  //     String res = temp.bio;
+
+  //     expect(res, "hello");
+  //   });
+
+  // });
 }

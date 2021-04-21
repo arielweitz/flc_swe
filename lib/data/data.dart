@@ -19,17 +19,11 @@ class Store {
     profiles = {};
     String yr = "";
     String id = "";
-    //print("Hi");
     info.docs.forEach((result) {
       Map<String, Profile> profMap = {};
       yr = result.id;
-      //print("yo");
-      //print(result.data());
       result.data().forEach((key, value) {
         id = key.toString();
-        //print(yr);
-        //print(id);
-        //print(List<String>.from(value['lookingFor']).runtimeType);
         profMap[id] = Profile(
             name: value['name'].toString(),
             standing: value['standing'].toString(),
@@ -44,11 +38,8 @@ class Store {
             linkedin: value['linkedin'].toString(),
             committees: value['committees'].toString(),
             lookingFor: List<String>.from(value['lookingFor']));
-        //print(profMap.length);
       });
       profiles[yr] = profMap;
-      //profMap.clear();
-      //print(profiles.length);
     });
   }
 
