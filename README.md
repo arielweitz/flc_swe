@@ -1,6 +1,6 @@
 # flc_swe
 
-A new Flutter project.
+FLC profile pages.
 
 ## Project Description
 
