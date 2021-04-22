@@ -1,4 +1,6 @@
 // Imports the Flutter Driver API.
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flc_swe/data/data.dart';
 import 'package:flc_swe/models/profile.dart';
 import 'package:test/test.dart';
 import 'package:flc_swe/practice_math.dart';
@@ -134,14 +136,49 @@ void main() {
     });
   });
 
-  // group('Firebase', () {
-  //   //some tests related to firebase, they are commented out though as they have hard coded information
+  // group('Firebase', () async {
+  //   //some tests related to firebase, they are commented out though as they have hard coded information which will fail when changed
 
-  //   test('bio', () {
-  //     String res = temp.bio;
+  //   Store obj = Store();
+  //   QuerySnapshot info = await obj.fbProfiles();
+  //   obj.setProfiles(info);
+  //
+  //   Profile temp = Profile(
+  //      bio: "hello",
+  //      name: "bob",
+  //      uid: "bob123",
+  //      email: "bob123@ufl.edu",
+  //      linkedin: "bob/linkedin",
+  //      phone: "1234567890",
+  //      major: "cs",
+  //      years: "2020-2021",
+  //      imageURL: "123.com",
+  //      position: "Councilmember",
+  //      standing: "Freshman",
+  //      committees: "1, 2, 3",
+  //      lookingFor: ["Internship"]);
 
-  //     expect(res, "hello");
+  //   test('notempty', () {
+  //     expect(obj.getProfiles().isNotEmpty, true);
   //   });
 
+  //   test('notemptyv2', () {
+  //     expect(obj.getProfiles().containsKey('2020-2021'), true);
+  //   });
+
+  //   test('notemptyv3', () {
+  //     expect(obj.getProfiles()['2020-2021'].containsKey('arielweitzenfeld'), true);
+  //   });
+  //
+  //   test('addworks', () async {
+  //     await obj.addProfileInfo(temp);
+  //     expect(obj.getProfiles()['2020-2021'].containsKey('bob123'), true);
+  //   });
+  //
+  //   test('deleteworks', () async {
+  //     await obj.deleteProfile(temp);
+  //     expect(!obj.getProfiles()['2020-2021'].containsKey('bob123'), true);
+  //   });
+  //
   // });
 }
