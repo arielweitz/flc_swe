@@ -1,6 +1,6 @@
 // Imports the Flutter Driver API.
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flc_swe/data/data.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:flc_swe/data/data.dart';
 import 'package:flc_swe/models/profile.dart';
 import 'package:test/test.dart';
 import 'package:flc_swe/practice_math.dart';
