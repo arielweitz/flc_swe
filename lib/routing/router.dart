@@ -150,8 +150,17 @@ class FluroRouter {
   });
 
   static fluro.Handler _loginHandler = fluro.Handler(
-      handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
-          LoginPage());
+      handlerFunc: (BuildContext context, Map<String, dynamic> params) {
+    return Consumer<UserModel>(
+      builder: (context, user, __) {
+        if (user != null) {
+          return HomePage();
+        } else {
+          return LoginPage();
+        }
+      },
+    );
+  });
 
   static void setupRouter() {
     router.define(
